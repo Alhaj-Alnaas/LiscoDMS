@@ -1,0 +1,138 @@
+﻿@model ACS.Core.Entities.Message
+@using Syncfusion.EJ2
+
+@{
+    ViewData["Title"] = "عرض مسودة";
+}
+
+@section NewMessgaeStyle {
+<link href="@Url.Content("~/css/NewMessgaeStyle.css")" rel="stylesheet" type="text/css" />
+}
+
+<div class="container pt-3">
+    <div class="row mt-2">
+        <div class="col-md e-rtl">
+            @if (ViewBag.SenderResponsibilityCode != null)
+            {
+                <input id="senderResponsibilityCode" type="hidden" value="@ViewBag.SenderResponsibilityCode" />
+            }
+            <input id="messageId" type="hidden" value="@ViewBag.messageId" />
+            <input style="text-align:right;" value="@ViewBag.MessageTitle" id="title" type="text" class="form-control form-control-lg" placeholder="عنوان المراسلة" autocomplete="off">
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-12">
+            @* enableRtl="true" *@
+            <ejs-richtexteditor enableRtl="true" width="100%" id="body" ejs-for="Body" showCharCount="true">
+                <e-richtexteditor-pastecleanupsettings plainText="true"></e-richtexteditor-pastecleanupsettings>
+                <e-richtexteditor-toolbarsettings items="@ViewBag.items">
+
+                </e-richtexteditor-toolbarsettings>
+            </ejs-richtexteditor>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+
+        <div class="col-2 tool">
+            <a class="btn btn-dark btn-lg w-100" onclick="saveFromSubUser('False')" id="send" href="#"><i class="fa fa-archive" aria-hidden="true"></i></a>
+            <span class="tooltipp">حفظ المسودة</span>
+        </div>
+        <div class="col-md-1 tool">
+            <a onclick="return confirm('سيتم حذف المسودة. هل أنت متأكد؟')" style="background-color:#F08080" class="btn btn-light btn-lg w-100" asp-action="DeleteDraft" asp-controller="SubUsers" asp-route-Id="@ViewBag.messageId"><i class="fa fa-ban" aria-hidden="true"></i></a>
+            <span class="tooltipp">حذف المسودة</span>
+        </div>
+        <div class="col-md-3">
+            @{
+                if (ViewBag.Categories != null)
+                {
+                    <select data-placeholder="إضافة تصنيف" multiple id="CategoriesList" class="chosen-select-rtl form-control form-control-lg" asp-items="ViewBag.Categories"></select>
+                }
+            }
+        </div>
+        <div class="col-md-6">
+            @* --------------------------------- *@
+            @{
+                var asyncSettings = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = @Url.Content("~/Messages/SaveFile") };
+                var asyncSettingsForTempFiles = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = @Url.Content("~/Messages/SaveTempFile") };
+            }
+            <div class="control-section">
+                @*<div class="control_wrapper">*@
+                <ejs-uploader selected="onFileSelected" allowedExtensions=".pdf,.jpg,.jpeg" enableRtl="true" id="UploadFiles" autoUpload="false" removing="onFileRemove" dropArea=".control-fluid" asyncSettings="@asyncSettings">
+
+                </ejs-uploader>
+                @*</div>*@
+            </div>
+            <div class="control-section">
+                @*<div class="control_wrapper">*@
+                <ejs-uploader selected="onTempFileSelected" enableRtl="true" id="UploadTempFiles" autoUpload="false" dropArea=".control-fluid" asyncSettings="@asyncSettingsForTempFiles">
+                </ejs-uploader>
+                @*</div>*@
+            </div>
+            @* --------------------------------- *@
+        </div>
+    </div>
+    <div class="row mt-3">
+        <ejs-chiplist id="chip-avatar" enableDelete="true" enableRtl click="chipClick" delete="chipDelete">
+            <e-chips>
+                @foreach (var attach in Model.Documents)
+                {
+                    <e-chip text="@attach.Id" enabled="true"></e-chip>
+                }
+            </e-chips>
+        </ejs-chiplist>
+        @*@foreach (var attach in Model.Documents)
+            {
+            <a class="d-inline mr-1" asp-action="DownloadAttach" asp-route-fileName="@attach.Id" asp-controller="Messages">
+            <span class="badge badge-info">@attach.Name</span>
+            </a>
+            }*@
+    </div>
+</div>
+
+@*<script>
+    window.onbeforeunload = function () {
+    return 'Changes you made may not be saved!';
+    };
+    </script>*@
+
+<script>
+    function onFileRemove(args) {
+        args.postRawFile = true;
+    };
+</script>
+
+<script>
+    window.onload = function (args) {
+        var uploaderObj = document.getElementById("UploadFiles").ej2_instances[0];
+        uploaderObj.setProperties({
+            buttons: {
+                browse: 'إدراج النسخة الورقية',
+                clear: 'حذف الكل',
+                upload: ''
+            }
+        })
+        var uploaderObj = document.getElementById("UploadTempFiles").ej2_instances[0];
+        uploaderObj.setProperties({
+            buttons: {
+                browse: 'إرفاق ملف إضافي',
+                clear: 'حذف الكل',
+                upload: ''
+            }
+        })
+        var rteObj = document.getElementById('body').ej2_instances[0];
+        rteObj.executeCommand('justifyRight');
+        rteObj.executeCommand('fontSize', '18pt');
+    };
+</script>
+<script>
+    function chipClick(e){
+        window.location = "@Url.RouteUrl(new { Controller = "SubUsers", Action = "DownloadAttach"})/?fileName=" + e.text;
+
+    };
+        function chipDelete(e){
+            window.location = "@Url.RouteUrl(new { Controller = "SubUsers", Action = "DeleteAttach"})/?fileName=" + e.text;
+        };
+</script>
+

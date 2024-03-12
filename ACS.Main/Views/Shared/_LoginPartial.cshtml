@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ACS.Core.Entities.Bases;
+@inject SignInManager<BaseUser> SignInManager
+@inject UserManager<BaseUser> UserManager
+
+<div class="profile-details">
+    @*<img src="~/test/profile.jpg" alt="profileImg">*@
+    <div class="name_job">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            var user = await UserManager.GetUserAsync(User);
+            var name = user.FullName;
+            var fileNum = user.UserName;
+            var jop = user.JobtypeName;
+            <a asp-area="Identity" asp-page="/Account/Manage/Index">
+                <div class="name">
+                    <span class="links_name">
+                        @name | @fileNum
+                    </span>
+                </div>
+            </a>
+            <div class="job">@jop</div>
+
+        }
+
+    </div>
+</div>
+ @*asp-route-returnUrl="@Url.Action("Inbox", "Messages", new { area = "" })"*@
+<form id="myForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Identity/Account/Login">
+</form>
+<a href="#" onclick="document.getElementById('myForm').submit();">
+    <i class="fa fa-power-off" aria-hidden="true" id="log_out"></i>
+</a>
+<span class="tooltip">تسجيل خروج</span>

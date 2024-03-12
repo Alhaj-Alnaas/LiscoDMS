@@ -1,0 +1,33 @@
+﻿@{
+    //if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    //{
+    //    Layout = (string)parentLayout;
+
+    //}
+    //else
+    //{
+    //  Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    //}
+    Layout = "/Views/Shared/_MainLayout.cshtml";
+}
+<div class="container mt-5 text-right" dir="rtl">
+
+    <h2>إدارة حسابك</h2>
+
+    <div>
+        <h4>لتغيير بعض المعلومات يجب الاتصال بإدارة شؤون العاملين</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-2">
+                <partial name="_ManageNav" />
+            </div>
+            <div class="col-md-10">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

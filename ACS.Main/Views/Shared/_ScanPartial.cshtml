@@ -1,0 +1,49 @@
+﻿<div class="text-center">
+    <button type="button" onclick="scanImage();" class="btn btn-dark mt-1">مسح</button>
+</div>
+
+@*<div id="selectedFiles" class="row" style="padding: 3px"></div>*@
+
+<div id="selectedFiles" class="row" style="padding: 3px">
+
+    @*<div class="col-sm-2 text-center" style="border: 1px solid black;">
+        <img id="fl1" height="200" width="160" src="~/Images/lisco1.jpg" class="selFile" title="">
+        <br />1
+    </div>
+
+    <div class="col-sm-2 text-center" style="border: 1px solid black;">
+        <img id="fl2" height="200" width="160" src="~/Images/lisco2.jpg" class="selFile" title="">
+        <br />2
+    </div>*@
+
+</div>
+
+
+
+<div class="modal fade scandetail" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div style="max-height:1200px;overflow:scroll;">
+                <canvas id="myCanvas"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade dalert" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                لم يتم العثور على برنامج المسح الضوئي في جهازك
+            </div>
+            <div class="modal-body">
+                <div class="text-right">
+                    يرجى تشغيل برنامج المسح الضوئي أولاً، إذا كنت تستخدم النظام لأول مرة فيجب عليك تنزيل برنامج المسح الضوئي وتثبيته ثم تشغيله أولاً ثم تحديث المتصفح.
+                </div>
+                <a href="~/SrcFile/Scan_App_SetUp.msi" download>تحميل ملفات برنامج المسح الضوئي</a>
+            </div>
+        </div>
+    </div>
+</div>
+

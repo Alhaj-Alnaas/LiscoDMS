@@ -1,0 +1,114 @@
+﻿@model ACS.Core.Entities.Message
+@using Syncfusion.EJ2
+
+@{
+    ViewData["Title"] = "مسودة جديدة";
+}
+
+@{
+    var asyncSettings = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = @Url.Content("~/Messages/SaveFile") };
+    var asyncSettingsForTempFiles = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = @Url.Content("~/Messages/SaveTempFile") };
+}
+
+@section NewMessgaeStyle {
+<link href="@Url.Content("~/css/NewMessgaeStyle.css")" rel="stylesheet" type="text/css" />
+}
+
+<div class="container pt-3">
+    <div class="row">
+        <div class="col-12 text-right">
+            <input id="senderResponsibilityCode" type="hidden" value="@ViewBag.SenderResponsibilityCode" />
+            @*<input style="text-align:right;" readonly id="senderDiscription" type="text" class="form-control form-control-lg mb-3" value="@ViewBag.SenderDescription" />*@
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <input style="text-align:right;" id="title" type="text" class="form-control form-control-lg" placeholder="عنوان الرسالة">
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <ul class="nav nav-tabs e-rtl" role="tablist">
+                <li class="nav-item">
+                    <a style="color: black;font-size:18px; font-weight:900;" class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" onclick="selectTextOrCopy('True')" id="textMessage">مراسلة نصية</a>
+                </li>
+                <li class="nav-item">
+                    <a style="color: black;font-size:18px; font-weight:900;" class="nav-link" data-toggle="tab" href="#tabs-2" role="tab" onclick="selectTextOrCopy('False')" id="copyMessage">نسخة ورقية (PDF , JPG)</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                    <ejs-richtexteditor enableRtl="true" width="100%" id="body" showCharCount="true">
+                        <e-richtexteditor-pastecleanupsettings plainText="true"></e-richtexteditor-pastecleanupsettings>
+                        <e-richtexteditor-toolbarsettings type="MultiRow" items="@ViewBag.items">
+
+                        </e-richtexteditor-toolbarsettings>
+                    </ejs-richtexteditor>
+                </div>
+
+                <div class="tab-pane" id="tabs-2" role="tabpanel">
+                    <ejs-uploader selected="onFileSelected" allowedExtensions=".pdf,.jpg,.jpeg" enableRtl="true" id="UploadFiles" autoUpload="false" dropArea=".control-fluid" asyncSettings="@asyncSettings">
+                    </ejs-uploader>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+
+        <div class="col-2 tool">
+            <a class="btn btn-dark btn-lg w-100" onclick="saveFromSubUser('True')" id="send" href="#"><i class="fa fa-archive" aria-hidden="true"></i></a>
+            <span class="tooltipp">حفظ إلى المسودات</span>
+        </div>
+        <div class="col-1 tool">
+        </div>
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            @* --------------------------------- *@
+            <div class="control-section">
+                <div class="control_wrapper">
+                    <ejs-uploader selected="onTempFileSelected" enableRtl="true" id="UploadTempFiles" autoUpload="false" dropArea=".control-fluid" asyncSettings="@asyncSettingsForTempFiles">
+                    </ejs-uploader>
+                </div>
+            </div>
+            @* --------------------------------- *@
+        </div>
+    </div>
+</div>
+
+@*<script>
+    window.onbeforeunload = function () {
+    return 'Changes you made may not be saved!';
+    };
+    </script>*@
+
+<script>
+    window.onload = function (args) {
+        var uploaderObj = document.getElementById("UploadFiles").ej2_instances[0];
+        uploaderObj.setProperties({
+            buttons: {
+                browse: 'إدراج النسخة الورقية',
+                clear: 'حذف الكل',
+                upload: ''
+            }
+        })
+        var uploaderObj = document.getElementById("UploadTempFiles").ej2_instances[0];
+        uploaderObj.setProperties({
+            buttons: {
+                browse: 'إرفاق ملف إضافي',
+                clear: 'حذف الكل',
+                upload: ''
+            }
+        })
+        var rteObj = document.getElementById('body').ej2_instances[0];
+        rteObj.executeCommand('justifyRight');
+        rteObj.executeCommand('fontSize', '18pt');
+    };
+</script>
+<script>
+    function onFileRemove(args) {
+        args.postRawFile = true;
+    };
+</script>

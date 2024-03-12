@@ -1,0 +1,65 @@
+﻿@model IList<SearchInOldSystem.DatabaseEntity.PostSendr>
+@{
+    ViewData["Title"] = "البحث في الأرشيف";
+}
+
+<nav class="navbar navbar-expand-lg fixed-top" style="margin-right: 78px; background: #11101D;" dir="rtl">
+    <form id="frmPost" class="form-inline my-2 my-lg-0" dir="rtl" method="post">
+        @*<input class="form-control mr-sm-2" name="LtrYear" type="search" placeholder="السنة" aria-label="السنة">*@
+        <input class="form-control mr-sm-2" id="LtrNo" name="LtrNo" type="search" placeholder="رقم الرسالة" aria-label="رقم الرسالة">
+        <input class="form-control mr-sm-2" id="LtrTitle" name="LtrTitle" type="search" placeholder="موضوع الرسالة" aria-label="موضوع الرسالة">
+        <input class="form-control mr-sm-2" id="MessageOrgnaization" name="MessageOrgnaization" type="search" placeholder="جهة الرسالة" aria-label="جهة الرسالة">
+        <label style="color:white; margin-right:7px;">
+            من
+            <input data-val="true" value="@DateTime.Now.AddYears(-1).ToString("yyyy-MM-dd")" type="date" id="StartDate" name="startDate" placeholder="من تاريخ" class="form-control mr-sm-2" />
+        </label>
+        <label style="color:white; margin-right:7px;
+">
+            إلى
+            <input data-val="true" value="@DateTime.Now.ToString("yyyy-MM-dd")" type="date" id="EndDate" name="EndDate" placeholder="إلى تاريخ" class="form-control mr-sm-2" />
+        </label>
+
+        <div class="font-weight-bold text-md-center">
+            <div class="form-check form-check-inline">
+                <input style="width:20px; height:20px;" class="form-check-input" type="checkbox" name="MessageTypeOut" id="MessageTypeOut" value="true" checked>
+                <label class="form-check-label text-light" for="MessageTypeOut">صادر</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input style="width:20px; height:20px;" class="form-check-input" type="checkbox" name="MessageTypeIn" id="MessageTypeIn" value="true" checked>
+                <label class="form-check-label text-light" for="MessageTypeIn">وارد</label>
+            </div>
+        </div>
+
+        <button class="form-control btn btn-success my-2 my-sm-0 mr-sm-2" dir="rtl" type="button" onclick="refresh()">بحث</button>
+    </form>
+</nav>
+
+<div id="oldMessagesList">
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(refresh());
+
+    function refresh() {
+        $.ajax({
+            type: "GET",
+            url: "/OldSystemMessage/OldMessagesPartial",
+            data: {
+                MessageTypeOut: $("#MessageTypeOut").is(":checked"),
+                MessageTypeIn: $("#MessageTypeIn").is(":checked"),
+                StartDate: $("#StartDate").val(),
+                EndDate: $("#EndDate").val(),
+                LtrNo: $("#LtrNo").val(),
+                LtrTitle: $("#LtrTitle").val(),
+                MessageOrgnaization: $("#MessageOrgnaization").val()},
+            error:function(e){alert("nope"+e);},
+            success: function (partialViewData) {
+                $('#oldMessagesList').html(partialViewData);}
+            });
+        };
+</script>
+
+
+
+

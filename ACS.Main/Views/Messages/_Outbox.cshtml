@@ -1,0 +1,136 @@
+﻿@using ReflectionIT.Mvc.Paging;
+@addTagHelper *, ReflectionIT.Mvc.Paging
+@model PagingList<ACS.Core.Entities.Message>
+
+
+
+@{
+    ViewData["Title"] = "الصادر";
+}
+<div class="container bootdey pt-4">
+    <div class="row e-rtl bg-secondary mb-3 rounded">
+        <div class="row col-md-6">
+            <div>
+                <b class="text-white bg-dark rounded p-3 mt-2"><i class="fas fa-paper-plane fa-fw"></i></b>
+            </div>
+            @Html.Raw("&nbsp;")
+            <div class="font-weight-bolder text-light" style="font-size:larger;">
+                المراسلات الصادرة
+            </div>
+        </div>
+    </div>
+    <div class="email-app mb-4">
+        <main class="inbox">
+            <div class="toolbar">
+                @*<div class="btn-group">
+                    <button type="button" class="btn btn-light">
+                    <span class="fa fa-envelope"></span>
+                    </button>
+                    <button type="button" class="btn btn-light">
+                    <span class="fa fa-star"></span>
+                    </button>
+                    <button type="button" class="btn btn-light">
+                    <span class="fa fa-star-o"></span>
+                    </button>
+                    <button type="button" class="btn btn-light">
+                    <span class="fa fa-bookmark-o"></span>
+                    </button>
+                    </div>
+                    <div class="btn-group">
+                    <button type="button" class="btn btn-light">
+                    <span class="fa fa-mail-reply"></span>
+                    </button>
+                    <button type="button" class="btn btn-light">
+                    <span class="fa fa-mail-reply-all"></span>
+                    </button>
+                    <button type="button" class="btn btn-light">
+                    <span class="fa fa-mail-forward"></span>
+                    </button>
+                    </div>
+                    <button type="button" class="btn btn-light">
+                    <span class="fa fa-trash-o"></span>
+                    </button>
+                    <div class="btn-group">
+                    <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                    <span class="fa fa-tags"></span>
+                    <span class="caret"></span>
+                    </button>
+                    <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">add label <span class="badge badge-danger"> Home</span></a>
+                    <a class="dropdown-item" href="#">add label <span class="badge badge-info"> Job</span></a>
+                    <a class="dropdown-item" href="#">add label <span class="badge badge-success"> Clients</span></a>
+                    <a class="dropdown-item" href="#">add label <span class="badge badge-warning"> News</span></a>
+                    </div>
+                    </div>*@
+                @*<div class="">
+                    <nav>
+                    <vc:pager paging-list="@Model" />
+                    </nav>
+                    </div>*@
+            </div>
+            @* ---------------------------------------------------------- *@
+            <ul class="messages">
+                @foreach (var item in Model)
+                {
+                    <li class="message">
+                        @*<input value="@item.Id" type="checkbox" style="right: 0; top: 40%; position: absolute; z-index: 1; width:20px; height:20px;" />*@
+                        <a asp-controller="Messages" asp-action="Message" asp-route-id="@item.Id">
+                            <div class="actions">
+                                <span class="action"><i class="fa fa-star-o"></i></span>
+                            </div>
+                            <div class="flags">
+                                @if (item.IsOrigin == true && (item.Documents.Count() > 0))
+                                {
+                                    <span class="flag"><i class="fas fa-file-pdf"></i></span>
+                                }
+                                @if (item.SerialNumber != null || (item.SerialNumber == null && (item.ResponsibilityCode != null || item.ResponsibilityCode == "")))
+                                {
+                                    <span class="flag"><i class="fas fa-briefcase text-black-50"></i></span>
+                                }
+                                @if (item.IsOrigin == false)
+                                {
+                                    <span class="flag"><i class="fas fa-signature" style="color:blue;"></i></span>
+                                }
+                            </div>
+                            <div class="header">
+                                <span class="date">
+                                    <span class="fa fa-paper-clip"></span> @Html.DisplayFor(modelItem => item.SendingDateTime)
+                                </span>
+                                <span class="from" dir="rtl">
+                                    @{
+                                        int i = 0;
+                                        foreach (var package in item.Packages)
+                                        {
+                                            @Html.DisplayFor(modelItem => package.RecipintDiscription)
+                                            @Html.Raw("،")
+
+                                            @Html.Raw("&nbsp;")
+                                            i++;
+                                            if (i > 2)
+                                            {
+                                                @Html.Raw("............")
+                                                break;
+                                            }
+                                        }
+                                    }
+                                </span>
+                            </div>
+                            <div class="title">
+                                <span class="text-light mr-1 bg-dark" dir="rtl">
+                                    @Html.DisplayFor(modelItem => item.SerialNumber)
+                                </span>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </div>
+                            <div class="description e-rtl">
+                                @Html.DisplayFor(modelItem => item.OriginalBody)
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </main>
+    </div>
+    <nav>
+        <vc:pager paging-list="@Model" />
+    </nav>
+</div>

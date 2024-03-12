@@ -1,0 +1,361 @@
+﻿@model ACS.Core.Entities.Message
+@using Syncfusion.EJ2
+@inject ACS.Core.Interfaces.Services.IOrgnaizationServices<Organization> _organizationService
+
+@{
+    var OrganizationsList = await _organizationService.GetOrgnaizationsByFileNumber(@ViewBag.CurrentUserFileNumber);
+    ViewData["Title"] = "عرض مسودة";
+}
+
+@section NewMessgaeStyle {
+    <link href="@Url.Content("~/css/NewMessgaeStyle.css")" rel="stylesheet" type="text/css" />
+}
+
+<div class="container pt-3">
+    <div class="row e-rtl">
+        @if (@ViewBag.JobCatId == 1)
+        {
+            <div class="col-md-6">
+                <form method="get" asp-action="EditDraft">
+                    <div class="input-group input-group-lg ">
+                        <select class="custom-select" dir="rtl" id="messageType" name="messageType" onchange="this.form.submit()">
+                            <option value="-1" selected disabled>إرسال المراسلة كـ</option>
+                            <option value="0">مراسلة بريد داخلي</option>
+                            <option value="1">مراسلة إدارية</option>
+                            <option value="2">تعميم للمستوى الأدنى</option>
+                            <option value="3">تعميم</option>
+                            @{
+                                foreach (var Organization in OrganizationsList)
+                                {
+                                    string respAndDesig = Organization.ResponsibilityCode + "." + Organization.DesignationId;
+                                    <option value="@respAndDesig">@Organization.Description</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 text-right">
+                <input style="text-align:right;" readonly id="senderDiscription" type="text" class="form-control form-control-lg " value="@ViewBag.SenderDescription" />
+            </div>
+        }
+        else
+        {
+            <div class="col-md-12 text-right">
+                <input style="text-align:right;" readonly id="senderDiscription" type="text" class="form-control form-control-lg mb-3" value="@ViewBag.SenderDescription" />
+            </div>
+        }
+
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-3">
+            @if (ViewBag.sn != null)
+            {
+                @*<input readonly value="@ViewBag.sn" style="text-align:center;" id="serial" type="text" class="form-control form-control-lg" placeholder="الرقم الإشاري">*@
+                <div class="input-group">
+                    <input readonly id="serial" type="text" size="8" maxlength="8" class="form-control text-center form-control-lg" value="@ViewBag.sn">
+                    <input onkeypress="return isNumberKey(event)" type="text" size="4" maxlength="4" id="lserial" class=" form-control text-center form-control-lg" placeholder="التسلسل الإشاري" value="@ViewBag.lsn">
+                </div>
+            }
+
+        </div>
+        <div class="col-md-9 text-right">
+            <input id="SenderDesignationId" type="hidden" value="@ViewBag.SenderDesignationId" />
+            @{
+                if (ViewBag.Users != null)
+                {
+                    <select data-placeholder="إرسال إلى" multiple id="UsersList" class="chosen-select-rtl form-control form-control-lg" asp-items="ViewBag.Users"></select>
+                }
+            }
+        </div>
+    </div>
+
+    @if (ViewBag.sn != null)
+    {
+        <div class="row mt-2">
+            <div class="col-3">
+                <input style="text-align:center;" onkeydown="return false" id="DaysToReplay" type="number" class="form-control form-control-lg" placeholder="عدد الأيام المتوقعة للرد" min="0" max="30" autocomplete="off">
+            </div>
+            <div class="col-9 text-right">
+                <select data-placeholder="صورة إلى" multiple id="CCUsersList" class="chosen-select-rtl mb-3 form-control form-control-lg" asp-items="ViewBag.CCusers"></select>
+            </div>
+        </div>
+    }
+
+    <div class="row mt-2">
+        <div class="col-md e-rtl">
+            @if (ViewBag.SenderResponsibilityCode != null)
+            {
+                <input id="senderResponsibilityCode" type="hidden" value="@ViewBag.SenderResponsibilityCode" />
+            }
+            <input id="messageId" type="hidden" value="@ViewBag.messageId" />
+            <input style="text-align:right;" value="@ViewBag.MessageTitle" id="title" type="text" class="form-control form-control-lg" placeholder="عنوان المراسلة" autocomplete="off">
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-1 tool">
+            @{
+                switch (ViewBag.messageType)
+                {
+                    case "0":
+                        <a class="btn btn-dark btn-lg w-100" onclick="sendDraftWait()" id="send" href="#"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+                        break;
+                    case "1":
+                        <a class="btn btn-dark btn-lg w-100" onclick="checkThenSend()" id="send" href="#"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+                        break;
+                    case "2":
+                        <a class="btn btn-dark btn-lg w-100" onclick="sendGeneralWaitTrue()" id="send" href="#"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+                        break;
+                    case "3":
+                        <a class="btn btn-dark btn-lg w-100" onclick="sendDraftWaitFalse()" id="send" href="#"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+                        break;
+                    default:
+                        <a class="btn btn-dark btn-lg w-100" onclick="checkThenSend()" id="send" href="#"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+                        break;
+                }
+            }
+            <span class="tooltipp">إرسال</span>
+        </div>
+        <div class="col-md-1 tool">
+            <a class="btn btn-dark btn-lg w-100" onclick="save('False')" id="send" href="#"><i class="fa fa-archive" aria-hidden="true"></i></a>
+            <span class="tooltipp">حفظ المسودة</span>
+        </div>
+        <div class="col-md-1 tool">
+            <a onclick="return confirm('سيتم حذف المسودة. هل أنت متأكد؟')" style="background-color:#F08080" class="btn btn-light btn-lg w-100" asp-action="DeleteDraft" asp-controller="Messages" asp-route-Id="@ViewBag.messageId"><i class="fa fa-ban" aria-hidden="true"></i></a>
+            <span class="tooltipp">حذف المسودة</span>
+        </div>
+        <div class="col-md-3">
+            @{
+                if (ViewBag.Categories != null)
+                {
+                    <select data-placeholder="إضافة تصنيف" multiple id="CategoriesList" class="chosen-select-rtl form-control form-control-lg" asp-items="ViewBag.Categories"></select>
+                }
+            }
+        </div>
+        <div class="col-md-6">
+            @* --------------------------------- *@
+            @{
+                var asyncSettings = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = @Url.Content("~/Messages/SaveFile") };
+                var asyncSettingsForTempFiles = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = @Url.Content("~/Messages/SaveTempFile") };
+            }
+            <div class="control-section">
+                @*<div class="control_wrapper">*@
+                <ejs-uploader selected="onFileSelected" allowedExtensions=".pdf,.jpg,.jpeg" enableRtl="true" id="UploadFiles" autoUpload="false" removing="onFileRemove" dropArea=".control-fluid" asyncSettings="@asyncSettings">
+
+                </ejs-uploader>
+                @*</div>*@
+            </div>
+            <div class="control-section">
+                @*<div class="control_wrapper">*@
+                <ejs-uploader selected="onTempFileSelected" enableRtl="true" id="UploadTempFiles" autoUpload="false" dropArea=".control-fluid" asyncSettings="@asyncSettingsForTempFiles">
+                </ejs-uploader>
+                @*</div>*@
+            </div>
+            @* --------------------------------- *@
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6">
+            @if (Model.Documents.Where(d => d.IsTemp == false).Count() > 0)
+            {
+                <input id="withFile" type="hidden" value="true" />
+                <div class="p-1 e-rtl border rounded">
+                    <b class="mt-0 rounded d-block">
+                        النسخة الورقية المصورة
+                    </b>
+                    @foreach (var attach in Model.Documents.Where(d => d.IsTemp == false))
+                    {
+                        <a class="d-block pe-auto" asp-action="DownloadAttach" asp-route-fileName="@attach.Id" asp-controller="Messages">
+                            <span class="badge badge-secondary">@attach.Name</span>
+                        </a>
+                    }
+                </div>
+                <div hidden="hidden">
+                    @* enableRtl="true" *@
+                    <ejs-richtexteditor enableRtl="true" width="100%" id="body" ejs-for="Body" showCharCount="true">
+                        <e-richtexteditor-pastecleanupsettings plainText="true"></e-richtexteditor-pastecleanupsettings>
+                        <e-richtexteditor-toolbarsettings items="@ViewBag.items">
+
+                        </e-richtexteditor-toolbarsettings>
+                    </ejs-richtexteditor>
+                </div>
+            }
+            else
+            {
+                <input id="withFile" type="hidden" value="false" />
+                <div class="row mt-2">
+                    <div class="col-md-12">
+                        @* enableRtl="true" *@
+                        <ejs-richtexteditor enableRtl="true" width="100%" id="body" ejs-for="Body" showCharCount="true">
+                            <e-richtexteditor-pastecleanupsettings plainText="true"></e-richtexteditor-pastecleanupsettings>
+                            <e-richtexteditor-toolbarsettings items="@ViewBag.items">
+
+                            </e-richtexteditor-toolbarsettings>
+                        </ejs-richtexteditor>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-6 e-rtl">
+            <b class="mt-0 rounded d-block">
+                المرفقات
+            </b>
+            @foreach (var attach in Model.Documents.Where(d => d.IsTemp == true))
+            {
+                <a class="d-block pe-auto" asp-action="DownloadAttach" asp-route-fileName="@attach.Id" asp-controller="Messages">
+                    <span class="badge badge-secondary">@attach.Name</span>
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="sendingModal" tabindex="-1" role="alert" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="alert">
+        <div class="modal-content ">
+            <div class="modal-body" style="position: relative;min-height: 200px; background-color:darkgrey">
+                <div class="containerr">
+                    <div class="box">
+                        <div class="border one"></div>
+                        <div class="border two"></div>
+                        <div class="border three"></div>
+                        <div class="border four"></div>
+
+                        <div class="line one"></div>
+                        <div class="line two"></div>
+                        <div class="line three"></div>
+                    </div>
+                </div><div class="containerr">
+                    <div class="box">
+                        <div class="border one"></div>
+                        <div class="border two"></div>
+                        <div class="border three"></div>
+                        <div class="border four"></div>
+
+                        <div class="line one"></div>
+                        <div class="line two"></div>
+                        <div class="line three"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<script>
+    window.onbeforeunload = function () {
+    return 'Changes you made may not be saved!';
+    };
+    </script>*@
+
+<script>
+    function onFileRemove(args) {
+        args.postRawFile = true;
+    };
+    //var dropElement = document.getElementsByClassName('control-fluid')[0];
+    //function onChange(args) {
+    //    var uploadObj = document.getElementById("UploadFiles")
+    //    uploadObj.ej2_instances[0].autoUpload = args.checked;
+    //    uploadObj.ej2_instances[0].clearAll();
+    //};
+    //function onChanged(args) {
+    //    var uploadObj = document.getElementById("UploadFiles")
+    //    uploadObj.ej2_instances[0].sequentialUpload = args.checked;
+    //    uploadObj.ej2_instances[0].clearAll();
+    //};
+</script>
+
+<script>
+    window.onload = function (args) {
+        var uploaderObj = document.getElementById("UploadFiles").ej2_instances[0];
+        uploaderObj.setProperties({
+            buttons: {
+                browse: 'إدراج نسخة ورقية إضافية',
+                clear: 'حذف الكل',
+                upload: ''
+            }
+        })
+        var uploaderObj = document.getElementById("UploadTempFiles").ej2_instances[0];
+        uploaderObj.setProperties({
+            buttons: {
+                browse: 'إرفاق ملف إضافي',
+                clear: 'حذف الكل',
+                upload: ''
+            }
+        })
+        var rteObj = document.getElementById('body').ej2_instances[0];
+        rteObj.executeCommand('justifyRight');
+        rteObj.executeCommand('fontSize', '18pt');
+    };
+
+    function checkThenSend() {
+        var serialParm = document.getElementById('lserial');
+        if (serialParm.value.replace(/\s/g, '') != '') {
+            var allSerial = document.getElementById('serial').value + '-' + ('0000' + serialParm.value).slice(-4)
+            $.ajax({
+                url: "/Messages/CheckSerialNumber?serialNumber=" + allSerial,
+                success: function (result) {
+                    if (result == true) {
+                        alert(allSerial + ' هذا الرقم الإشاري موجود مسبقاً! ');
+                        return false;
+                    }
+                    else {
+                        if (validateNewMessageForm() == false)
+                            return false;
+                        else {
+                            $("#sendingModal").appendTo("body");
+                            $("#sendingModal").modal({ backdrop: 'static', keyboard: false }, 'show');
+                            sendDraft('False');
+                        }
+
+                    }
+                }
+            })
+        }
+        else {
+            alert('أدخل الرقم الإشاري');
+            serialParm.value = '';
+            serialParm.focus();
+        }
+    };
+
+    function sendDraftWait() {
+        if (validateNewMessageForm() == false)
+            return false;
+        else {
+            $("#sendingModal").appendTo("body");
+            $("#sendingModal").modal({ backdrop: 'static', keyboard: false }, 'show');
+            sendDraft('True');
+        }
+    };
+    function sendGeneralWaitTrue() {
+        if (validateGeneralMessageForm() == false)
+            return false;
+        else {
+            $("#sendingModal").appendTo("body");
+            $("#sendingModal").modal({ backdrop: 'static', keyboard: false }, 'show');
+            sendGeneralDraft('True');
+        }
+    };
+    function sendDraftWaitFalse() {
+        if (validateGeneralMessageForm() == false)
+            return false;
+        else {
+            $("#sendingModal").appendTo("body");
+            $("#sendingModal").modal({ backdrop: 'static', keyboard: false }, 'show');
+            sendGeneralDraft('False');
+        }
+    };
+</script>
+<script>
+    function chipClick(e) {
+        window.location = "@Url.RouteUrl(new { Controller = "Messages", Action = "DownloadAttach"})/?fileName=" + e.text;
+
+    };
+    function chipDelete(e) {
+        window.location = "@Url.RouteUrl(new { Controller = "Messages", Action = "DeleteAttach"})/?fileName=" + e.text;
+    };
+</script>

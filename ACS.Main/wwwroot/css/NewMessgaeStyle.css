@@ -1,0 +1,58 @@
+﻿div .tooltipp {
+    position: absolute;
+    top: -20px;
+    left: calc(100% - 15px);
+    z-index: 3;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 400;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: 0s;
+}
+
+.tool:hover .tooltipp {
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.4s ease;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.control_wrapper {
+    max-width: 500px;
+    width: 100%;
+    float: right;
+    /*margin: auto;*/
+}
+
+.e-upload {
+    width: 100%;
+    position: relative;
+    margin-top: 2px;
+}
+
+    .e-upload .e-upload-actions .e-file-upload-btn {
+        display: none;
+    }
+
+.control_wrapper .e-upload .e-upload-drag-hover {
+    margin: 0;
+}
+
+.e-upload .e-file-select-wrap .e-btn, .e-upload .e-upload-actions .e-btn, .e-bigger.e-small .e-upload .e-file-select-wrap .e-btn, .e-bigger.e-small .e-upload .e-upload-actions .e-btn {
+    font-size: large;
+}
+
+#UploadFiles {
+    padding: 54px 12px 54px 0;
+}
+
+/*.e-richtexteditor .e-rte-content .e-content,
+.e-richtexteditor .e-source-content .e-content {
+    font-size: 18px;
+}*/

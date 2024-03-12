@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ACS.Core.DTOs.MessageDTO>
+
+@{
+    ViewData["Title"] = "المفضلة";
+}
+<style>
+    .table-hover tr:hover {
+        background: #00ff00;
+        cursor: pointer;
+    }
+</style>
+<table class="table table-hover table-bordered">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr onclick="location.href = '@(Url.Action("Action", "Messages", new { Id = item.Id }))'">
+                <td style="width:5px;">
+                    <input type="checkbox" />
+                </td>
+                <td style="width:10%;">
+                    @Html.DisplayFor(modelItem => item.SenderFullName)
+                </td>
+                <td style="width:auto;">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td style="width: 15%;">
+                    @Html.DisplayFor(modelItem => item.SendingDateTime.Date)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

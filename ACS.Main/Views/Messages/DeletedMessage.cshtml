@@ -1,0 +1,226 @@
+﻿@model IList<ACS.Core.DTOs.MessageDTO>
+@using Syncfusion.EJ2
+@inject ACS.Core.Interfaces.Services.IOrgnaizationServices<Organization> _organizationService
+
+@{
+    var asyncSettings = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = @Url.Content("~/Messages/SaveFile") };
+    var asyncSettingsForTempFiles = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = @Url.Content("~/Messages/SaveTempFile") };
+}
+
+@section TimelineStyle {
+        <link href="@Url.Content("~/css/timeline.css")" rel="stylesheet" type="text/css" />
+}
+        <style>
+            /***********************Message recipts style*******************************/
+
+            .tooltipp {
+                position: relative;
+                display: inline-block;
+                border-bottom: 1px dotted black;
+            }
+
+                .tooltipp .tooltipptext {
+                    visibility: hidden;
+                    width: 120px;
+                    background-color: black;
+                    color: #fff;
+                    text-align: center;
+                    border-radius: 4px;
+                    padding: 5px 0;
+                    /* Position the tooltip */
+                    position: absolute;
+                    z-index: 1;
+                }
+
+                .tooltipp:hover .tooltipptext {
+                    visibility: visible;
+                }
+
+
+            /****************************Comments Scroller****************************/
+
+            .scroller {
+                height: 70vh;
+                overflow-y: scroll;
+                scroll-snap-type: y mandatory;
+            }
+
+                .scroller .scrollerStart {
+                    scroll-snap-align: start;
+                }
+        </style>
+    @{
+    var OriginalMessage = Model.FirstOrDefault(m => m.IsOrigin == true && m.OriginMessageId == m.Id.ToString());
+    if (OriginalMessage == null)
+        OriginalMessage = Model.FirstOrDefault(m => m.IsOrigin == true);
+    var CommentsMessage = Model.Where(m => m.IsOrigin == false && m.OriginMessageId == OriginalMessage.Id.ToString()).ToList();
+    IEnumerable<Organization> OrganizationsList = await _organizationService.GetOrgnaizationsByFileNumber(@ViewBag.CurrentUserFileNumber);
+}
+
+<div class="container mt-1">
+    @*<a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site http://www.website.com."
+    title="Share by Email">
+    <img src="http://png-2.findicons.com/files/icons/573/must_have/48/mail.png">
+    </a>*@
+    <div class="row e-rtl">
+        <div class="col-md-5">
+            <div class="e-rtl bg-secondary mb-1 mt-2 rounded">
+                <b class="text-white bg-dark rounded"> من: </b>@Html.Raw("&nbsp;")
+                <div class="tooltipp text-white font-weight-bolder">
+                    @Html.Raw(OriginalMessage.SenderDiscription)
+                    @if (OriginalMessage.SenderDiscription != OriginalMessage.SenderFullName)
+                    {
+                            <span class="tooltipptext">@OriginalMessage.SenderFullName</span>
+                    }
+                </div>
+            </div>
+            <div class="e-rtl bg-secondary mb-1 mt-2 rounded">
+                <b class="text-white bg-dark rounded"> إلى: </b>@Html.Raw("&nbsp;")
+                @{
+                    int i = 0;
+                    foreach (var package in OriginalMessage.Packages.Where(l => l.IsCC == false).ToList())
+                    {
+                        if (i <= 1)
+                        {
+                                        <div class="tooltipp text-white font-weight-bolder">
+                                @Html.Raw(package.RecipintDiscription)
+                                @if (package.RecipintDiscription != package.Recipint.FullName)
+                                {
+                                                    <span class="tooltipptext">@Html.Raw(package.Recipint.FullName)</span>
+                                }
+                                        </div>
+                            @Html.Raw("&nbsp;")
+                        }
+                        else if (i > 1)
+                        {
+                                        <b class="text-white bg-dark rounded">
+                                            <a href="#" onclick="ShowAllRecipintsModal('@OriginalMessage.Id', 'false');">إظهار الكل @OriginalMessage.Packages.Where(l => l.IsCC == false).ToList().Count</a>
+                                        </b>
+                            break;
+                        }
+                        i++;
+                    }
+                }
+            </div>
+
+            <div class="e-rtl bg-secondary mt-2 rounded">
+                <b class="text-white bg-dark rounded"> صورة إلى: </b>@Html.Raw("&nbsp;")
+                @{
+                    int j = 0;
+                    foreach (var package in OriginalMessage.Packages.Where(l => l.IsCC == true).ToList())
+                    {
+                        if (j <= 1)
+                        {
+                                        <div class="tooltipp text-white font-weight-bolder">
+                                @Html.Raw(package.RecipintDiscription)
+                                @if (package.RecipintDiscription != package.Recipint.FullName)
+                                {
+                                                    <span class="tooltipptext">@Html.Raw(package.Recipint.FullName)</span>
+                                }
+                                        </div>
+                            @Html.Raw("&nbsp;")
+                        }
+                        else if (j > 1)
+                        {
+                                        <b class="text-white bg-dark rounded">
+                                            <a href="#" onclick="ShowAllRecipintsModal('@OriginalMessage.Id', 'true');">إظهار الكل @OriginalMessage.Packages.Where(l => l.IsCC == true).ToList().Count</a>
+                                        </b>
+                            break;
+                        }
+                        j++;
+                    }
+                }
+            </div>
+
+            <hr />
+
+            <div class="mt-3 p-1 e-rtl border rounded">
+                <b class="mt-0 rounded d-block">
+                    المرفقات
+                </b>
+                @foreach (var attach in OriginalMessage.Documents.Where(d => d.IsTemp == true))
+                {
+                        <a class="d-block pe-auto" asp-action="DownloadAttach" asp-route-fileName="@attach.Id" asp-controller="Messages">
+                            <span class="badge badge-secondary">@attach.Name</span>
+                        </a>
+                }
+
+                @foreach (var CommentMessage in CommentsMessage)
+                {
+                    @foreach (var attach in CommentMessage.Documents.Where(d => d.IsTemp == true))
+                    {
+                                <a class="d-block pe-auto" asp-action="DownloadAttach" asp-route-fileName="@attach.Id" asp-controller="Messages">
+                                    <span class="badge badge-secondary">@attach.Name</span>
+                                </a>
+                    }
+                }
+            </div>
+            <hr />
+
+            <div class="mt-2">
+                <ejs-chiplist id="chipCategories" enableRtl>
+                    <e-chips>
+                        @foreach (var cat in OriginalMessage.MessagesCategories)
+                        {
+                                <e-chip text="@cat.CategoryName" enabled="true"></e-chip>
+                        }
+                    </e-chips>
+                </ejs-chiplist>
+            </div>
+        </div>
+        <!-------------------------------------------------->
+        <div class="col-md-7">
+            <div class="mt-2 embed-responsive embed-responsive-4by3 rounded">
+                <object data="@ViewBag.Path" type="application/pdf">
+                </object>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade e-rtl" id="AllRecipintsModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        -->
+        @*style=" max-width:1000px !important;"*@
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">المستلمين</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position:absolute;left:0;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body e-rtl" id="AllRecipintsModalBody">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function ShowModal_qr() {
+        $("#QRModal").appendTo("body");
+        $("#QRModal").modal("show");
+    };
+
+    function chipClick(value) {
+        window.location = "@Url.RouteUrl(new { Controller = "Messages", Action = "DownloadAttach"})/?fileName=" + value;
+
+    };
+
+    function ShowAllRecipintsModal(id, CC) {
+        var url = "/Messages/ShowMessageAllRecipints?Id=" + id + "&CC=" + CC;
+        $("#AllRecipintsModalBody").load(url, function () {
+            $("#AllRecipintsModal").appendTo("body");
+            $("#AllRecipintsModal").modal("show");
+        })
+    };
+
+</script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+
+
+

@@ -1,0 +1,289 @@
+﻿@inject ACS.Core.Interfaces.Services.IMessagesServices<Message> _service
+@inject ACS.Core.Interfaces.Services.IOrgnaizationServices<Organization> _organizationService
+@inject ACS.Core.Interfaces.Providers.IUserProvider _UserProvider
+
+@{
+    var CurrentUser = await _UserProvider.GetCurrentUserAsync();
+    var DraftsCount = await _service.GetDraftMessageCount(CurrentUser is SubApplicationUser ? _UserProvider.GetUserBySubUserFileNumber(CurrentUser.FileNumber) : CurrentUser);
+    var OrganizationsList = await _organizationService.GetOrgnaizationsByFileNumber(CurrentUser is SubApplicationUser ? _UserProvider.GetUserBySubUserFileNumber(CurrentUser.FileNumber).FileNumber : CurrentUser.FileNumber);
+    //var NewMessagesCount = await _service.GetNewMessageCount(CurrentUser, OrganizationsList.Select(d => d.ResponsibilityCode).ToList());
+}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - نظام إدارة المراسلات</title>
+    <link rel="stylesheet" href="~/css/NavbarStyle.css" />
+    <link rel="stylesheet" href="~/font-awesome/css/all.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/MessagesStyle.css" />
+    <link href="~/css/sendingstyle.css" rel="stylesheet" />
+    <link rel="icon" href="~/file-signature-solid.ico">
+    @* ------------------------------------------------------------------------- *@
+    <link href="~/chosen/chosen.css" rel="stylesheet" />
+    @* ------------------------------------------------------------------------- *@
+    <link href="~/css/ej2/material.css" rel="stylesheet" />
+    @* -------------------------------------------------------------------- *@
+
+     
+</head>
+<body>
+    <div class="fab-container">
+        <div class="fab fab-icon-holder">
+            <i class="fas fa-question"></i>
+        </div>
+        <ul class="fab-options" dir="rtl">
+            <li>
+                <span class="fab-label">حول النظام</span>
+                <a asp-controller="Home" asp-action="About">
+                    <div class="fab-icon-holder">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <span class="fab-label"> معلومات الإصدار </span>
+                <a asp-controller="Home" asp-action="ReleaseNotes">
+                    <div class="fab-icon-holder">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <span class="fab-label">نقل الملفات</span>
+                <a href="http://10.10.102.4:8084/" target="_blank">
+                    <div class="fab-icon-holder">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <span class="fab-label">دليل الهاتف</span>
+                <a asp-controller="Home" asp-action="Phones" target="_blank">
+                    @*<a href="~/Phones.pdf" target="_blank">*@
+                    <div class="fab-icon-holder">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <span class="fab-label">ساعدنا باقتراح</span>
+                <a href="#" onclick="ShowHelpUsModalModal()">
+                    <div class="fab-icon-holder">
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    @* ************************************************************ *@
+    <div class="sidebar">
+        <div class="logo-details">
+            <div class="logo_name">نظام إدارة المراسلات</div>
+            <i class="fas fa-file-signature icon"></i>
+            <i class="fas fa-bars" id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            @{
+                if (CurrentUser is ApplicationUser || (CurrentUser is SubApplicationUser && User.IsInRole("SEARCH")))
+                {
+                    <li class="nav-item @Html.ActiveClass("Messages", "Search")">
+                        <i class="fas fa-search bx-search"></i>
+                        <form asp-controller="Messages" asp-action="Search" method="post">
+                            <div class=""></div>
+                            <input name="KeyWords" type="search" placeholder="...ابحث">
+                            <input type="hidden" name="MessageTypeOut" value="true" checked>
+                            <input type="hidden" name="MessageTypeIn" value="true" checked>
+                        </form>
+                        <span class="tooltip">ابحث</span>
+                    </li>
+                }
+                //<li class="nav-item @Html.ActiveClass("Home", "Dashboard")">
+                //    <a asp-controller="Home" asp-action="Dashboard">
+                //        <i class="fas fa-tachometer-alt"></i>
+                //        <span class="links_name">لوحة المعلومات</span>
+                //    </a>
+                //    <span class="tooltip">لوحة المعلومات</span>
+                //</li>
+                if (CurrentUser is ApplicationUser || (CurrentUser is SubApplicationUser && User.IsInRole("SEND")))
+                {
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropbtn">
+                                <i class="fas fa-sticky-note"></i>
+                                <span class="links_name">مراسلة جديدة</span>
+                            </a>
+                            <div class="dropdown-content">
+                                @{
+                                    if (CurrentUser.JobCatId == 1 || CurrentUser is SubApplicationUser)
+                                    {
+                                        <a asp-controller="Messages" asp-action="NewFormalMessage" class="p-lg-2 w-auto">مراسلة إدارية</a>
+                                        <a asp-controller="Messages" asp-action="NewUnFormalMessage" class="p-lg-2 w-auto">بريد داخلي</a>
+                                        <a asp-controller="Messages" asp-action="NewGeneralMessage" asp-route-LowLevel="true" class="p-lg-2 w-auto">تعميم للمستوى الأدنى</a>
+                                        <a asp-controller="Messages" asp-action="NewGeneralMessage" class="p-lg-2 w-auto">تعميم</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Messages" asp-action="NewUnFormalMessage" class="p-lg-2 w-auto">بريد داخلي</a>
+                                    }
+                                }
+
+                                @{
+                                    foreach (var Organization in OrganizationsList)
+                                    {
+                                        string respAndDesig = Organization.ResponsibilityCode + "." + Organization.DesignationId;
+                                        <a asp-controller="Messages" asp-action="NewCommitteeMessage" asp-route-ResponsibilityCode="@respAndDesig" asp-route-Description="@Organization.Description" class="p-lg-2 w-auto">@Organization.Description</a>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item @Html.ActiveClass("Messages", "CreateDraft")">
+                        <a asp-controller="Messages" asp-action="CreateDraft">
+                            <i class="fas fa-sticky-note"></i>
+                            <span class="links_name">إنشاء مسودة</span>
+                        </a>
+                        <span class="tooltip">إنشاء مسودة</span>
+                    </li>
+                }
+                if (CurrentUser is ApplicationUser || (CurrentUser is SubApplicationUser && User.IsInRole("INBOX")))
+                {
+                    <li class="nav-item @Html.ActiveClass("Messages", "Inbox")">
+                        <a asp-controller="Messages" asp-action="Inbox">
+                            <i class="fa fa-inbox fa-fw"></i>
+                            <span class="links_name">الوارد</span>
+                            <div id="partial-load"></div>
+                        </a>
+                        <span class="tooltip">الوارد</span>
+                    </li>
+                }
+                if (CurrentUser is ApplicationUser || (CurrentUser is SubApplicationUser && User.IsInRole("OUTBOX")))
+                {
+                    <li class="nav-item @Html.ActiveClass("Messages", "Outbox")">
+                        <a asp-controller="Messages" asp-action="Outbox">
+                            <i class="fas fa-paper-plane fa-fw"></i>
+                            <span class="links_name">الصادر</span>
+                        </a>
+                        <span class="tooltip">الصادر</span>
+                    </li>
+                }
+                <li class="nav-item @Html.ActiveClass("Messages", "Drafts")">
+                    <a asp-controller="Messages" asp-action="Drafts">
+                        <i class="fa fa-archive" aria-hidden="true"></i>
+                        <span class="links_name">المسودات</span>
+                        @{
+                            if (DraftsCount > 0)
+                            {
+                                <span class="badge badge-pill badge-primary" style="position:absolute; left:0; top:2px">@DraftsCount</span>
+                            }
+                        }
+                    </a>
+                    <span class="tooltip">المسودات</span>
+                </li>
+                <li class="nav-item @Html.ActiveClass("Messages", "Deleted")">
+                    <a asp-controller="Messages" asp-action="Deleted">
+                        <i class="fas fa-trash fa-fw"></i>
+                        <span class="links_name">المحذوفة</span>
+                    </a>
+                    <span class="tooltip">المحذوفة</span>
+                </li>
+                @*<li>
+            <a asp-controller="Messages" asp-action="">
+            <i class="fas fa-star fa-fw"></i>
+            <span class="links_name">المفضلة</span>
+            </a>
+            <span class="tooltip">المفضلة</span>
+            </li>*@
+            }
+            <li class="nav-item @Html.ActiveClass("OldSystemMessage", "Search")">
+                <a asp-controller="OldSystemMessage" asp-action="ShowOldMessages">
+                    <i class="fas fa-folder-minus"></i>
+                    <span class="links_name">النظام القديم</span>
+                </a>
+                <span class="tooltip">النظام القديم</span>
+            </li>
+            <li class="profile">
+                <partial name="_LoginPartial" />
+            </li>
+        </ul>
+    </div>
+    <div class="modal fade e-rtl" id="HelpUsModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="dialog">
+            <div class="modal-content container">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">اكتب اقتراحك وساعدنا في تطوير النظام</h5>
+                    <button type="button" class="close" data-dismiss="modal" style="position:absolute;left:0;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body e-rtl">
+                    <form id="feedbackForm" asp-action="SendFeedback" asp-controller="Home" method="post" name="contact-form">
+                        <div class="form-group">
+                            <textarea class="form-control mt-2" rows="5" name="feedbackText" id="feedbackText"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnsubmit" onclick="submitForm()" class="btn btn-dark btn-lg w-100" type="button"><i class="fas fa-comment-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="home-section">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </section>
+    @*<footer class="border-top footer text-muted">
+    <div class="container">
+    &copy; @DateTime.Now.Year - LISCO
+    </div>
+    </footer>*@
+    <script>
+        function ShowHelpUsModalModal() {
+            $("#HelpUsModal").appendTo("body");
+            $("#HelpUsModal").modal("show");
+        };
+        function submitForm() {
+            var frm = document.getElementsByName('contact-form')[0];
+            frm.submit();
+            frm.reset();
+            $("#HelpUsModal").modal("hide");
+            alert("شكرا لك، سيتم أخذ ملاحظاتك بعين الإعتبار");
+            return false;
+        };
+    </script>
+    <script src="~/js/site.js"></script>
+    <script src="~/js/script.js"></script>
+
+    @*<script src="~/js/scanner.js"></script>*@
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @* --------------------------------------------------------------------------------------------------------- *@
+    <script src="~/chosen/chosen.jquery.min.js"></script>
+    <script src="~/chosen/init.js"></script>
+    @* --------------------------------------------------------------------------------------------------------- *@
+    <script src="~/js/ej2/ej2.min.js"></script>
+    <ejs-scripts></ejs-scripts>
+    @* --------------------------------------------------------------------------------------------------------- *@
+    <script>
+        function get_new() {
+            $('#partial-load').load('/Messages/NewMessagesCountPartial');
+        };
+        $(document).ready(get_new);
+        setInterval(get_new, 10000);
+    </script>
+    @RenderSection("TimelineStyle", false)
+    @RenderSection("NewMessgaeStyle", false)
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

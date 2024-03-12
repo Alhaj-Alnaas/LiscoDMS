@@ -1,0 +1,14 @@
+﻿@*@inject ACS.Core.Interfaces.Services.IMessagesServices<Message> _service
+@inject ACS.Core.Interfaces.Services.IOrgnaizationServices<Organization> _organizationService
+@inject ACS.Core.Interfaces.Providers.IUserProvider _UserProvider*@
+
+@*@{
+    var CurrentUser = await _UserProvider.GetCurrentUserAsync();
+    var DraftsCount = await _service.GetDraftMessageCount(CurrentUser);
+    var OrganizationsList = await _organizationService.GetOrgnaizationsByFileNumber(CurrentUser.FileNumber);
+    var NewMessagesCount = await _service.GetNewMessageCount(CurrentUser, OrganizationsList.Select(d => d.ResponsibilityCode).ToList());
+    if (NewMessagesCount > 0)
+    {*@
+        <span id="NewMessagesCount" class="badge badge-pill badge-primary" style="position:absolute; left:0; top:2px">@ViewBag.NewMessagesCount</span>
+@*    }
+}*@

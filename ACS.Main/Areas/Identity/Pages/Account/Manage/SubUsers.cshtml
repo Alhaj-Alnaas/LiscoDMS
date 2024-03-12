@@ -1,0 +1,181 @@
+﻿@page
+@model SubUsersModel
+@{
+    ViewData["Title"] = "المستخدم الفرعي";
+    ViewData["ActivePage"] = ManageNavPages.SubUsers;
+}
+
+<h4>مستخدم فرعي جديد</h4>
+<br />
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-12">
+        <form id="profile-form" method="post" asp-page-handler="NewSubUser">
+            <div class="row">
+                <div class="col-md-6">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Input.SubUserFileNumber"></label>
+                        <input asp-for="Input.SubUserFileNumber" class="form-control" />
+                        <span asp-validation-for="Input.SubUserFileNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Password"></label>
+                        <input asp-for="Input.Password" class="form-control" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 m-auto">
+                    <input type="checkbox" style="width:20px; height:20px;" checked disabled /> المسودات
+                    <br />
+                    <input type="checkbox" name="Input.Roles" value="Search" style="width:20px; height:20px;" /> البحث
+                    <br />
+                    <input type="checkbox" name="Input.Roles" value="Inbox" style="width:20px; height:20px;" /> الوارد
+                    <br />
+                    <input type="checkbox" name="Input.Roles" value="Outbox" style="width:20px; height:20px;" /> الصادر
+                    <br />
+                    @*<input type="checkbox" name="Input.Roles" value="Reply" style="width:20px; height:20px;" /> الرد
+                    <br />*@
+                    <input type="checkbox" name="Input.Roles" value="Forward" style="width:20px; height:20px;" /> الإحالة
+                    <br />
+                    <input type="checkbox" name="Input.Roles" value="Send" style="width:20px; height:20px;" /> الإرسال
+                    @*<br />
+                    <input type="checkbox" name="Input.Roles" value="OldSystem" style="width:20px; height:20px;" /> النظام القديم*@
+                </div>
+            </div>
+            <button id="update-profile-button" form="profile-form" type="submit" class="btn btn-primary">إضافة</button>
+        </form>
+        <hr />
+        <h4>المستخدمين الفرعيين الحاليين</h4>
+        <br />
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>
+                        اسم الدخول
+                    </td>
+                    <td>
+                        الإسم
+                    </td>
+                    <td>الصلاحيات</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var item in Model.Users)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                <div class="row">
+
+                                    <form id="@item.Id" method="post" asp-page-handler="UpdateRolesOfSubUser">
+                                        <input type="checkbox" form="x" style="width:20px; height:20px;" checked disabled />
+                                        @Html.Raw("المسودات")
+                                        @Html.Raw("&nbsp;")
+                                        <input type="hidden" value="@item.Id" name="Id" />
+                                        @Html.Raw("&nbsp;&nbsp;")
+                                        @{
+                                            var roles = item.Roles.ToList();
+                                            if (roles.Contains("SEARCH"))
+                                            {
+                                                <input type="checkbox" style="width:20px; height:20px;" name="roles" value="SEARCH" checked />
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" style="width:20px; height:20px;" name="roles" value="SEARCH" />
+                                            }
+                                            @Html.Raw("البحث")
+                                            @Html.Raw("&nbsp;")
+
+                                            if (roles.Contains("INBOX"))
+                                            {
+                                                <input type="checkbox" style="width:20px; height:20px;" name="roles" value="INBOX" checked />
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" style="width:20px; height:20px;" name="roles" value="INBOX" />
+                                            }
+                                            @Html.Raw("الوارد")
+                                            @Html.Raw("&nbsp;")
+                                        }
+                                        <br />
+                                        @{
+                                            if (roles.Contains("OUTBOX"))
+                                            {
+                                                <input type="checkbox" style="width:20px; height:20px;" name="roles" value="OUTBOX" checked />
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" style="width:20px; height:20px;" name="roles" value="OUTBOX" />
+                                            }
+                                            @Html.Raw("الصادر")
+                                            @Html.Raw("&nbsp;")
+
+                                            //if (roles.Contains("REPLY"))
+                                            //{
+                                            //    <input type="checkbox" style="width:20px; height:20px;" name="roles" value="REPLY" checked />
+                                            //}
+                                            //else
+                                            //{
+                                            //    <input type="checkbox" style="width:20px; height:20px;" name="roles" value="REPLY" />
+                                            //}
+                                            //@Html.Raw("الرد")
+                                            //@Html.Raw("&nbsp;")
+
+                                            if (roles.Contains("FORWARD"))
+                                            {
+                                                <input type="checkbox" style="width:20px; height:20px;" name="roles" value="FORWARD" checked />
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" style="width:20px; height:20px;" name="roles" value="FORWARD" />
+                                            }
+                                            @Html.Raw("الإحالة")
+                                            @Html.Raw("&nbsp;")
+
+                                            if (roles.Contains("SEND"))
+                                            {
+                                                <input type="checkbox" style="width:20px; height:20px;" name="roles" value="SEND" checked />
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" style="width:20px; height:20px;" name="roles" value="SEND" />
+                                            }
+                                            @Html.Raw("الإرسال")
+                                            @Html.Raw("&nbsp;")
+                                        }
+                                    </form>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row mt-1">
+                                    <div class="col-md-12 text-center">
+                                        <a asp-page-handler="DeleteSubUser" asp-route-id="@item.Id" class="btn btn-danger btn-sm">حذف</a>
+
+                                        <a asp-page-handler="ResetPasswordOfSubUser" asp-route-id="@item.Id" class="btn btn-info btn-sm">إعادة تعيين كلمة المرور</a>
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col-md-12 text-center">
+                                        <button type="submit" form="@item.Id" class="btn btn-primary btn-sm w-75">حفظ تعديل صلاحيات</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

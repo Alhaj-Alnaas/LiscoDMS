@@ -1,0 +1,21 @@
+﻿@{
+    var title = " تعليق على: " + @ViewBag.Title;
+}
+
+<input id="OriginalMessageId_f" type="hidden" value="@ViewBag.OriginalMessageId" />
+<input id="title_f" type="hidden" value="@title" />
+<input id="senderDiscription" type="hidden" value="@ViewBag.SenderDescription" />
+
+@if (ViewBag.SenderResponsibilityCode != null)
+{
+    <input id="senderResponsibilityCode" type="hidden" value="@ViewBag.SenderResponsibilityCode" />
+}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group row">
+                <select data-placeholder="إرسال إلى" multiple id="UsersList_f" class="chosen-select-rtl mb-3 form-control form-control-lg" asp-items="ViewBag.Users"></select>
+            </div>
+        </div>
+    </div>
+</div>

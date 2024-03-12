@@ -1,0 +1,10 @@
+﻿@model IList<ACS.Core.Entities.Package>
+
+@foreach (var item in Model)
+{
+    <div class="text-right">
+        <ul class="list-group" dir="rtl">
+            <li class="list-group-item">@item.RecipintDiscription</li>
+        </ul>
+    </div>
+}

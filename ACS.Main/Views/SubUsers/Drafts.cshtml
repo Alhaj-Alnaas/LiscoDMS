@@ -1,0 +1,89 @@
+﻿@using ReflectionIT.Mvc.Paging;
+@addTagHelper *, ReflectionIT.Mvc.Paging
+@model PagingList<ACS.Core.Entities.Message>
+
+
+@{
+    ViewData["Title"] = "المسودات";
+}
+<div class="container bootdey pt-4">
+    <div class="row e-rtl bg-secondary mb-3 rounded">
+        <div class="row col-md-6">
+            <div>
+                <b class="text-white bg-dark rounded p-3 mt-2"><i class="fa fa-archive" aria-hidden="true"></i></b>
+            </div>
+            @Html.Raw("&nbsp;")
+            <div class="font-weight-bolder text-light" style="font-size:larger;">
+                المسودات
+            </div>
+        </div>
+    </div>
+    <div class="email-app mb-4">
+        <main class="inbox">
+            <div class="toolbar">
+                @*<div class="btn-group">
+                        <button type="button" class="btn btn-light">
+                            <span class="fa fa-envelope"></span>
+                        </button>
+                        <button type="button" class="btn btn-light">
+                            <span class="fa fa-star"></span>
+                        </button>
+                        <button type="button" class="btn btn-light">
+                            <span class="fa fa-star-o"></span>
+                        </button>
+                        <button type="button" class="btn btn-light">
+                            <span class="fa fa-bookmark-o"></span>
+                        </button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-light">
+                            <span class="fa fa-mail-reply"></span>
+                        </button>
+                        <button type="button" class="btn btn-light">
+                            <span class="fa fa-mail-reply-all"></span>
+                        </button>
+                        <button type="button" class="btn btn-light">
+                            <span class="fa fa-mail-forward"></span>
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-light">
+                        <span class="fa fa-trash-o"></span>
+                    </button>*@
+                @*<div class="">
+                        <nav>
+                            <vc:pager paging-list="@Model" />
+                        </nav>
+                    </div>*@
+            </div>
+            @* ---------------------------------------------------------- *@
+            <ul class="messages">
+                @foreach (var item in Model)
+                {
+                    <li class="message unread">
+                        @*<input value="@item.Id" type="checkbox" style="right: 0; top: 40%; position: absolute; z-index: 1; width:20px; height:20px;" />*@
+                        <a asp-controller="Messages" asp-action="EditDraft" asp-route-id="@item.Id">
+                            <div class="actions">
+
+                            </div>
+                            <div class="header">
+                                <span class="date">
+                                    <span class="fa fa-paper-clip"></span> @Html.DisplayFor(modelItem => item.CreatedOn)
+                                </span>
+                                <span class="from"> أنشأت بواسطة/ @Html.DisplayFor(modelItem => item.CreatedBy.FullName)</span>
+                            </div>
+                            <div class="title">
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </div>
+                            <div class="description">
+                                @Html.DisplayFor(modelItem => item.OriginalBody)
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </main>
+    </div>
+    <nav>
+        <vc:pager paging-list="@Model" />
+    </nav>
+</div>

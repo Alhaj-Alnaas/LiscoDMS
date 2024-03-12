@@ -1,0 +1,111 @@
+﻿@{
+    ViewData["Title"] = "الوارد";
+}
+
+@{
+    List<object> operators = new List<object>();
+    operators.Add(new { value = "startswith", text = "يبدأ بـ" });
+    operators.Add(new { value = "endswith", text = "ينهي بـ" });
+    operators.Add(new { value = "contains", text = "يحتوي على" });
+    operators.Add(new { value = "equal", text = "يساوي" });
+    operators.Add(new { value = "notequal", text = "لا يساوي" });
+}
+
+@*@{
+    List<object> operatorsForDate = new List<object>();
+    operators.Add(new { value = "equal", text = "يساوي" });
+    operators.Add(new { value = "greaterthan", text = "أكبر من" });
+    operators.Add(new { value = "greaterthanorequal", text = "أكبر من أو يساوي" });
+    operators.Add(new { value = "lessthan", text = "أصغر من" });
+    operators.Add(new { value = "lessthanorequal", text = "أصغر من أو يساوي" });
+    operators.Add(new { value = "notequal", text = "لا يساوي" });
+}*@
+
+<style>
+    .e-grid .e-headercell{
+        background-color: #2382c3;
+        color: white;
+    }
+
+    .e-grid .e-headercelldiv {
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .e-grid .e-rowcell {
+        font-size: 15px;
+    }
+</style>
+
+<div class="container-fluid pt-1">
+    <div class="control-section">
+        <ejs-grid id="Grid" dataSource="ViewBag.dataSource" allowGrouping="true" allowFiltering="true" enableRtl="true" allowReordering="true" allowPaging="true" allowResizing="true" enableHover="true" queryCellInfo="queryCellInfo" rowSelected="rowSelected" gridLines="Both">
+            @*actionBegin="onActionBegin"*@
+            <e-grid-selectionsettings type="Multiple"></e-grid-selectionsettings>
+            <e-grid-editSettings allowAdding="false" allowDeleting="false" allowEditing="false"></e-grid-editSettings>
+            <e-grid-filterSettings type="Menu" operators="@(new { stringOperator = operators })"></e-grid-filterSettings>
+            <e-grid-pagesettings pageSize="15" pageCount="10">
+            </e-grid-pagesettings>
+            <e-grid-groupSettings enableLazyLoading="true"></e-grid-groupSettings>
+
+            <e-grid-columns>
+                <e-grid-column field="Id" headerText="Id" isPrimaryKey="true" visible="false"></e-grid-column>
+
+                <e-grid-column field="IsReaded" allowfiltering="false" headerText="مقروء" width="40"></e-grid-column>
+
+                @*<e-grid-column type="checkbox" width="40"></e-grid-column>*@
+                <e-grid-column field="SerialNumber" headerText="الرقم الإشاري" isPrimaryKey="true" textAlign="Right" width="110" Allowgrouping="false"></e-grid-column>
+                <e-grid-column field="Title" headerText="عنوان المراسلة" width="170" textAlign="Left" Allowgrouping="false"></e-grid-column>
+                @*<e-grid-column field="OriginalBody" headerText="نص المراسلة" textAlign="Right" format="C2" width="120" Allowgrouping="false"></e-grid-column>*@
+                <e-grid-column field="SendingDateTime" format="y-M-d" headerText="تاريخ الإرسال" type="date" width="90" textAlign="Right"></e-grid-column>
+                <e-grid-column field="SenderDiscription" headerText="المرسل" width="150" textAlign="Left"></e-grid-column>
+                <e-grid-column field="passedBy" headerText="عن طريق" width="150" textAlign="Left"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+</div>
+
+
+@*filter="@(new { ui = new { create = "onFilterCreate", write = "onFilterWrite" } })"*@
+<script>
+    var startDate;
+    var endDate;
+    var customFilter;
+
+    function onFilterCreate(args) {
+        var flValInput = new ej.base.createElement('input', { className: 'flm-input' });
+        args.target.appendChild(flValInput);
+        var grid = document.getElementById("Grid").ej2_instances[0];
+        var date = [];
+        grid.filterSettings.columns.forEach(col => {
+            if (col.field === "SendingDateTime")
+                date.push(col.value);
+        });
+        var dateRangeInst = new ej.calendars.DateRangePicker({
+            startDate: date[0],
+            endDate: date[1],
+            change: function (e) {
+                if (e != undefined && e.value) {
+                    var grid = document.getElementById("Grid").ej2_instances[0];
+                    startDate = e.value[0];
+                    endDate = e.value[1];
+                    customFilter = true;
+                    grid.filterByColumn('SendingDateTime', 'greaterthan', startDate);
+                }
+
+            }
+        });
+        dateRangeInst.appendTo(flValInput);
+    }
+
+    function onFilterWrite(args) {
+    }
+
+    function onActionBegin(args) {
+        if (args.requestType === "filtering" && args.currentFilteringColumn === "SendingDateTime" && customFilter) {
+            customFilter = false;
+            args.columns.push({ actualFilterValue: {}, actualOperator: {}, field: "SendingDateTime", ignoreAccent: false, isForeignKey: false, matchCase: false, operator: "lessthan", predicate: "and", uid: this.getColumnByField(args.currentFilteringColumn).uid, value: endDate });
+        }
+    }
+
+</script>

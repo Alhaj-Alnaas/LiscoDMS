@@ -1,0 +1,90 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "تأكيد ملكية الحساب";
+}
+
+<div class="container mt-md-4" style="direction: rtl; text-align:right;">
+    <div class="text-center m-md-auto">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+    <div class="text-center m-md-auto">
+        تم تسجيل حسابك بنجاح،
+        نحن بحاجة إلى التحقق من هويتك،
+        تم إرسال رمز التحقق إلى هاتفك المحمول <b>@Model.Phone</b>،
+        الرجاء إدخال الرمز لتأكيد ملكية حسابك
+        شكراً لك.
+    </div>
+
+    <hr />
+    <br /><br />
+
+    <div class="m-md-auto">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>اسمك</label>
+                    <input class="form-control form-control-lg" type="text" value="@Model.Name" readonly />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>رقم ملفك</label>
+                    <input class="form-control form-control-lg" type="text" value="@Model.FileNumber" readonly />
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>بريدك الإلكتروني</label>
+                    <input class="form-control form-control-lg" type="text" value="@Model.Email" readonly />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>رقم هاتفك</label>
+                    <input class="form-control form-control-lg" type="text" value="@Model.Phone" readonly />
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>مكان عملك</label>
+                    <input class="form-control form-control-lg" type="text" value="@Model.Department" readonly />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>حالة حسابك</label>
+                    <input class="form-control form-control-lg" type="text" value="في انتظار تأكيد الهوية" readonly />
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="w-25 m-md-auto">
+            <form method="post">
+                <input asp-for="Input.FileNumber" type="hidden" value="@Model.FileNumber" />
+                <div class="text-center">
+                    <div>
+                        <div class="form-group">
+                            <label>أدخل رمز التحقق هنا</label>
+                            <input asp-for="Input.PhoneConfirmationCode" class="form-control form-control-lg" required/>
+                            <span asp-validation-for="Input.PhoneConfirmationCode" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-user btn-block">إرسال</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

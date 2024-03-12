@@ -1,0 +1,142 @@
+﻿@using ReflectionIT.Mvc.Paging;
+@addTagHelper *, ReflectionIT.Mvc.Paging
+@model PagingList<ACS.Core.Entities.Message>
+
+@{
+    ViewData["Title"] = "بحث";
+}
+<div class="container bootdey">
+    <div class="row mt-5 mb-5 e-rtl">
+        <div class="col-md-11">
+            <form dir="rtl" asp-action="Search" method="post">
+                <input style="text-align:right;" dir="rtl" lang="ar" required name="KeyWords" type="search" placeholder=" أدخل كلمة البحث - عنوان، تاريخ، رقم إشاري " class="form-control-lg form-control text-lg-right w-100" value="@ViewBag.KeyWord" />
+                <input type="hidden" name="MessageTypeOut" value="true" checked>
+                <input type="hidden" name="MessageTypeIn" value="true" checked>
+            </form>
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-dark btn-lg w-100" data-toggle="modal" onclick="ShowModal()" data-target="#AdvancedSearchModal" href="#">
+                <i class="fas fa-sliders-h"></i>
+            </a>
+            <span class="tooltip">بحث متقدم</span>
+        </div>
+
+    </div>
+
+    <div>
+        @*<div class="float-right mt-0">
+                <nav>
+                    <vc:pager paging-list="@Model" />
+                </nav>
+            </div>*@
+        <table class="table table-bordered table-striped table-hover" dir="rtl" lang="ar">
+            <thead>
+                <tr>
+                    <th style="text-align: center;">رقم الرسالة</th>
+                    <th style="text-align: center;">موضوع الرسالة</th>
+                    <th style="text-align: center;">صادرة من</th>
+                    <th style="text-align: center;">تاريخ الرسالة</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.SerialNumber)
+                        </td>
+                        <td style="text-align:right;">
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td style="text-align: right;">
+                            @Html.DisplayFor(modelItem => item.SenderDiscription)
+                        </td>
+                        <td style="text-align: center; direction:ltr;">
+                            @*@Convert.ToString(string.Format("{HH:mm yyyy/MM/dd}", item.SendingDateTime))*@
+                            @Html.DisplayFor(modelItem => item.SendingDateTime)
+                        </td>
+                        <td>
+                            <a class="btn btn-success btn-sm" asp-action="Message" asp-route-Id="@item.Id">استعراض</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <nav>
+        <vc:pager paging-list="@Model" />
+    </nav>
+    <div class="modal fade" id="AdvancedSearchModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content container">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">بحث متقدم</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body e-rtl" id="BodyDiv">
+                    <div>
+                        <form id="filterForm" dir="rtl" asp-action="Search" method="post" asp-controller="Messages">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control form-control-lg" name="MessageTitle" type="search" placeholder="عنوان الرسالة" aria-label="موضوع الرسالة">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control form-control-lg" name="MessageSerialNo" type="search" placeholder="الرقم الإشاري" aria-label="رقم الرسالة">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control form-control-lg" name="MessageOrgnization" type="search" placeholder="جهة الإصدار" aria-label="جهة الرسالة">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <input class="form-control form-control-lg" name="MessageBody" type="search" placeholder="نص الرسالة" aria-label="نص الرسالة">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control form-control-lg" name="MessageYear" type="search" placeholder="السنة" aria-label="السنة">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="font-weight-bold">
+                                                <div class="form-check">
+                                                    <input style="width:20px; height:20px;" class="form-check-input" type="checkbox" name="MessageTypeOut" id="MessageTypeOut" value="true" checked>
+                                                    <label class="form-check-label mr-4" for="MessageTypeOut">صادر</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input style="width:20px; height:20px;" class="form-check-input" type="checkbox" name="MessageTypeIn" id="MessageTypeIn" value="true" checked>
+                                                    <label class="form-check-label mr-4" for="MessageTypeIn">وارد</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <select data-placeholder="تصنيفات" multiple id="CategoriesList" name="MessageCategories" class="chosen-select-rtl mb-3 form-control form-control-lg" asp-items="ViewBag.Categories"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input value="@ViewBag.KeyWord" name="KeyWords" type="hidden">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-dark btn-lg w-100" type="submit" form="filterForm"><i class="fas fa-search bx-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function ShowModal() {
+        $("#AdvancedSearchModal").appendTo("body");
+        $('#AdvancedSearchModal').on('shown.bs.modal', function () {
+            $('.chosen-select-rtl', this).chosen('destroy').chosen({ rtl: true });
+        });
+        $("#AdvancedSearchModal").modal("show");
+    };
+</script>

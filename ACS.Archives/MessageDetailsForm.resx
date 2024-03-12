@@ -1,0 +1,1035 @@
+﻿<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="picBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 263</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="picBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="picBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>714, 70</value>
+  </data>
+  <data name="picBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="picBox.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;picBox.Name" xml:space="preserve">
+    <value>picBox</value>
+  </data>
+  <data name="&gt;&gt;picBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;picBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="pdfViewerControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 340</value>
+  </data>
+  <data name="pdfViewerPrinterSettings2.PrintLocation" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj00LjAuMC4wLCBDdWx0
+        dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0ZW0uRHJh
+        d2luZy5Qb2ludEYCAAAAAXgBeQAACwsCAAAAAAAAAAAAAAAL
+</value>
+  </data>
+  <data name="pdfViewerControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>714, 101</value>
+  </data>
+  <data name="pdfViewerControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="pdfViewerControl1.Text" xml:space="preserve">
+    <value>pdfViewerControl1</value>
+  </data>
+  <data name="&gt;&gt;pdfViewerControl1.Name" xml:space="preserve">
+    <value>pdfViewerControl1</value>
+  </data>
+  <data name="&gt;&gt;pdfViewerControl1.Type" xml:space="preserve">
+    <value>Syncfusion.Windows.Forms.PdfViewer.PdfViewerControl, Syncfusion.PdfViewer.Windows, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89</value>
+  </data>
+  <data name="&gt;&gt;pdfViewerControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pdfViewerControl1.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;txtSendingDate.Name" xml:space="preserve">
+    <value>txtSendingDate</value>
+  </data>
+  <data name="&gt;&gt;txtSendingDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSendingDate.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;txtSendingDate.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;labSendingDate.Name" xml:space="preserve">
+    <value>labSendingDate</value>
+  </data>
+  <data name="&gt;&gt;labSendingDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labSendingDate.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labSendingDate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;CCList.Name" xml:space="preserve">
+    <value>CCList</value>
+  </data>
+  <data name="&gt;&gt;CCList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CCList.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;CCList.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;MessageSender.Name" xml:space="preserve">
+    <value>MessageSender</value>
+  </data>
+  <data name="&gt;&gt;MessageSender.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MessageSender.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;MessageSender.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ReciptesList.Name" xml:space="preserve">
+    <value>ReciptesList</value>
+  </data>
+  <data name="&gt;&gt;ReciptesList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ReciptesList.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;ReciptesList.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;labSender.Name" xml:space="preserve">
+    <value>labSender</value>
+  </data>
+  <data name="&gt;&gt;labSender.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labSender.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labSender.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;labMesNo.Name" xml:space="preserve">
+    <value>labMesNo</value>
+  </data>
+  <data name="&gt;&gt;labMesNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labMesNo.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labMesNo.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;txtMessageSubject.Name" xml:space="preserve">
+    <value>txtMessageSubject</value>
+  </data>
+  <data name="&gt;&gt;txtMessageSubject.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtMessageSubject.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;txtMessageSubject.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;txtMessageNo.Name" xml:space="preserve">
+    <value>txtMessageNo</value>
+  </data>
+  <data name="&gt;&gt;txtMessageNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtMessageNo.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;txtMessageNo.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;labMesgSub.Name" xml:space="preserve">
+    <value>labMesgSub</value>
+  </data>
+  <data name="&gt;&gt;labMesgSub.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labMesgSub.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labMesgSub.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;txtMessageId.Name" xml:space="preserve">
+    <value>txtMessageId</value>
+  </data>
+  <data name="&gt;&gt;txtMessageId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtMessageId.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;txtMessageId.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 13</value>
+  </data>
+  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="groupBox1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>714, 180</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>بيانات المراسلة</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="txtSendingDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10.2pt</value>
+  </data>
+  <data name="txtSendingDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>354, 146</value>
+  </data>
+  <data name="txtSendingDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txtSendingDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 30</value>
+  </data>
+  <data name="txtSendingDate.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
+  <data name="txtSendingDate.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;txtSendingDate.Name" xml:space="preserve">
+    <value>txtSendingDate</value>
+  </data>
+  <data name="&gt;&gt;txtSendingDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSendingDate.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;txtSendingDate.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labSendingDate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labSendingDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="labSendingDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labSendingDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>616, 153</value>
+  </data>
+  <data name="labSendingDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="labSendingDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 23</value>
+  </data>
+  <data name="labSendingDate.TabIndex" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="labSendingDate.Text" xml:space="preserve">
+    <value>تاريخ الإرسال</value>
+  </data>
+  <data name="&gt;&gt;labSendingDate.Name" xml:space="preserve">
+    <value>labSendingDate</value>
+  </data>
+  <data name="&gt;&gt;labSendingDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labSendingDate.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labSendingDate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CCList.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="CCList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 54</value>
+  </data>
+  <data name="CCList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="CCList.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="CCList.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CCList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 34</value>
+  </data>
+  <data name="CCList.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="&gt;&gt;CCList.Name" xml:space="preserve">
+    <value>CCList</value>
+  </data>
+  <data name="&gt;&gt;CCList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CCList.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;CCList.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="columnHeader2.DisplayIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="columnHeader2.Width" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="columnHeader3.DisplayIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="columnHeader3.Text" xml:space="preserve">
+    <value>صورة إلى</value>
+  </data>
+  <data name="columnHeader3.Width" type="System.Int32, mscorlib">
+    <value>320</value>
+  </data>
+  <data name="MessageSender.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10.2pt</value>
+  </data>
+  <data name="MessageSender.Location" type="System.Drawing.Point, System.Drawing">
+    <value>354, 108</value>
+  </data>
+  <data name="MessageSender.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="MessageSender.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 30</value>
+  </data>
+  <data name="MessageSender.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="&gt;&gt;MessageSender.Name" xml:space="preserve">
+    <value>MessageSender</value>
+  </data>
+  <data name="&gt;&gt;MessageSender.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MessageSender.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;MessageSender.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ReciptesList.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="ReciptesList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 18</value>
+  </data>
+  <data name="ReciptesList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="ReciptesList.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="ReciptesList.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ReciptesList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 34</value>
+  </data>
+  <data name="ReciptesList.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="&gt;&gt;ReciptesList.Name" xml:space="preserve">
+    <value>ReciptesList</value>
+  </data>
+  <data name="&gt;&gt;ReciptesList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ReciptesList.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;ReciptesList.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="Id.DisplayIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="Id.Width" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="RecipName.DisplayIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="RecipName.Text" xml:space="preserve">
+    <value>أرسلت إلى</value>
+  </data>
+  <data name="RecipName.Width" type="System.Int32, mscorlib">
+    <value>320</value>
+  </data>
+  <data name="labSender.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labSender.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="labSender.Location" type="System.Drawing.Point, System.Drawing">
+    <value>622, 115</value>
+  </data>
+  <data name="labSender.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="labSender.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 23</value>
+  </data>
+  <data name="labSender.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="labSender.Text" xml:space="preserve">
+    <value>المرسل</value>
+  </data>
+  <data name="&gt;&gt;labSender.Name" xml:space="preserve">
+    <value>labSender</value>
+  </data>
+  <data name="&gt;&gt;labSender.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labSender.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labSender.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="labMesNo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labMesNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="labMesNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>622, 28</value>
+  </data>
+  <data name="labMesNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="labMesNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 23</value>
+  </data>
+  <data name="labMesNo.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="labMesNo.Text" xml:space="preserve">
+    <value>الرقم الإشاري</value>
+  </data>
+  <data name="&gt;&gt;labMesNo.Name" xml:space="preserve">
+    <value>labMesNo</value>
+  </data>
+  <data name="&gt;&gt;labMesNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labMesNo.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labMesNo.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="txtMessageSubject.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10.2pt</value>
+  </data>
+  <data name="txtMessageSubject.Location" type="System.Drawing.Point, System.Drawing">
+    <value>354, 70</value>
+  </data>
+  <data name="txtMessageSubject.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txtMessageSubject.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtMessageSubject.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 27</value>
+  </data>
+  <data name="txtMessageSubject.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;txtMessageSubject.Name" xml:space="preserve">
+    <value>txtMessageSubject</value>
+  </data>
+  <data name="&gt;&gt;txtMessageSubject.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtMessageSubject.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;txtMessageSubject.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="txtMessageNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 14pt, style=Bold</value>
+  </data>
+  <data name="txtMessageNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>436, 18</value>
+  </data>
+  <data name="txtMessageNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txtMessageNo.MaxLength" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="txtMessageNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 39</value>
+  </data>
+  <data name="txtMessageNo.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="txtMessageNo.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;txtMessageNo.Name" xml:space="preserve">
+    <value>txtMessageNo</value>
+  </data>
+  <data name="&gt;&gt;txtMessageNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtMessageNo.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;txtMessageNo.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="labMesgSub.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labMesgSub.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="labMesgSub.Location" type="System.Drawing.Point, System.Drawing">
+    <value>608, 70</value>
+  </data>
+  <data name="labMesgSub.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="labMesgSub.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 23</value>
+  </data>
+  <data name="labMesgSub.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="labMesgSub.Text" xml:space="preserve">
+    <value>المـوضـــوع</value>
+  </data>
+  <data name="&gt;&gt;labMesgSub.Name" xml:space="preserve">
+    <value>labMesgSub</value>
+  </data>
+  <data name="&gt;&gt;labMesgSub.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labMesgSub.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labMesgSub.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="txtMessageId.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="txtMessageId.Location" type="System.Drawing.Point, System.Drawing">
+    <value>45, 96</value>
+  </data>
+  <data name="txtMessageId.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txtMessageId.MaxLength" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="txtMessageId.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 34</value>
+  </data>
+  <data name="txtMessageId.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="txtMessageId.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtMessageId.Name" xml:space="preserve">
+    <value>txtMessageId</value>
+  </data>
+  <data name="&gt;&gt;txtMessageId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtMessageId.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;txtMessageId.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <metadata name="DeleteReciptMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>551, 17</value>
+  </metadata>
+  <data name="DeleteReciptMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 28</value>
+  </data>
+  <data name="&gt;&gt;DeleteReciptMenu.Name" xml:space="preserve">
+    <value>DeleteReciptMenu</value>
+  </data>
+  <data name="&gt;&gt;DeleteReciptMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="حــدفToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 24</value>
+  </data>
+  <data name="حــدفToolStripMenuItem.Text" xml:space="preserve">
+    <value>حــدف</value>
+  </data>
+  <data name="&gt;&gt;sendMessage.Name" xml:space="preserve">
+    <value>sendMessage</value>
+  </data>
+  <data name="&gt;&gt;sendMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sendMessage.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;sendMessage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;DeleteMessage.Name" xml:space="preserve">
+    <value>DeleteMessage</value>
+  </data>
+  <data name="&gt;&gt;DeleteMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DeleteMessage.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;DeleteMessage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 590</value>
+  </data>
+  <data name="groupBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="groupBox4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="groupBox4.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>722, 103</value>
+  </data>
+  <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="sendMessage.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="sendMessage.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="sendMessage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAbxJREFUaEPt
+        lg1NxEAQRk8CEpCABByAA3AADsABOAAH4AAcgANwAA5gHjDJl8vulrbTv2Re8pIj3O1O229mu0uSJEmS
+        Ci/m2e/HbfL154d5ZR6am8IvQH0wj81NULoA980kXgfmatGCH/f+donXnbnKeGmhQJG35qep/3OfzBNz
+        NWhxCrE5N99N/Y5LvGj6xeOlRdWgoe9N/a5KvI7MRdBCuiBe12YtXoucKVpAH4jXq6m/d2c9U3TjIRCd
+        VrwmP1N0szHQzMSr1fSTnCm6SRTE69nUtd3wM2V/Ax75hRkxVSiSeE16ppQWdrlbERdEbC7NSc6U0oI1
+        9YKGRoCGrr2yYO8zpbRITe4gkSDjQy+AyHATSusj64ddQETBQDR4akSltg8TbHSEogp2uJNEQvdQmVSn
+        5ih0wSiY97xW6NouE4mbFHGDftDFx0BBNyaNrmu6PF2e7OoOsq6mZOKs7lWiqymJCU0ZFpMWunEXXU3J
+        2ykxmRUtoEarKbH37I5EC1F4/BzvraYcPLsj0aKAhms1ZcjsjkSLazVl6OyOpFSwO9nsjqRU+OSzOxIv
+        etbZHckisztJkiRJ/s9u9w3YKUz6sN20jgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="sendMessage.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="sendMessage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 28</value>
+  </data>
+  <data name="sendMessage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="sendMessage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 41</value>
+  </data>
+  <data name="sendMessage.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="sendMessage.Text" xml:space="preserve">
+    <value>التأشير على المراسلة وإحالتها</value>
+  </data>
+  <data name="sendMessage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;sendMessage.Name" xml:space="preserve">
+    <value>sendMessage</value>
+  </data>
+  <data name="&gt;&gt;sendMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sendMessage.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;sendMessage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="DeleteMessage.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="DeleteMessage.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="DeleteMessage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAARNJREFUaEPt
+        mNFtw0AMQz1CRskGzUjZIBkhG7UjZIRukpLACTAOQpXiRH8UfMD7OdqUhfgn3owx5l9wh68/ynsO4faG
+        nzB7yN/kPVnX7DLZ8CNdJis90mX4rs7veJx1m81oY1+uQjpDWj6QzpCWD6QzqvIz/BieeDDBs8h5bUY1
+        Y4mq/AtGfuHBBM8i57UZkdN2qnIvACKn7VTlXgBETtupyr0AiJy2U5V7ARA5bacq9wIgctpOVe4FQOS0
+        narcC4DIaTtVuRcAkdN2qnIvACKn7VTlD8gHo9l/Xp5FzmszqhlLSMsH0hnS8oF0hrR8IJ0hLR9IZ3zD
+        /QClT9jO/PVY6RVK4BLKX4LdrZ/UjTFGybb9AI6B5DxwmaquAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="DeleteMessage.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="DeleteMessage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>246, 28</value>
+  </data>
+  <data name="DeleteMessage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="DeleteMessage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 41</value>
+  </data>
+  <data name="DeleteMessage.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="DeleteMessage.Text" xml:space="preserve">
+    <value>حـــدف مراسلة</value>
+  </data>
+  <data name="DeleteMessage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;DeleteMessage.Name" xml:space="preserve">
+    <value>DeleteMessage</value>
+  </data>
+  <data name="&gt;&gt;DeleteMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DeleteMessage.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;DeleteMessage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="clmId.DisplayIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="clmId.Width" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="clmFileName.DisplayIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="clmFileName.Text" xml:space="preserve">
+    <value>اسم الملف المرفق</value>
+  </data>
+  <data name="clmFileName.Width" type="System.Int32, mscorlib">
+    <value>250</value>
+  </data>
+  <data name="clmFileExtention.DisplayIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="clmFileExtention.Text" xml:space="preserve">
+    <value>الامتداد</value>
+  </data>
+  <data name="clmFileExtention.Width" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="clmFileSize.DisplayIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="clmFileSize.Text" xml:space="preserve">
+    <value>الحجم</value>
+  </data>
+  <data name="clmFileSize.Width" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <metadata name="downloadFileMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>910, 17</value>
+  </metadata>
+  <data name="downloadFileMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 28</value>
+  </data>
+  <data name="&gt;&gt;downloadFileMenu.Name" xml:space="preserve">
+    <value>downloadFileMenu</value>
+  </data>
+  <data name="&gt;&gt;downloadFileMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DocList.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt</value>
+  </data>
+  <data name="DocList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 458</value>
+  </data>
+  <data name="DocList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="DocList.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="DocList.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="DocList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>714, 114</value>
+  </data>
+  <data name="DocList.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="&gt;&gt;DocList.Name" xml:space="preserve">
+    <value>DocList</value>
+  </data>
+  <data name="&gt;&gt;DocList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DocList.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;DocList.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="تنزيلمرفقToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 24</value>
+  </data>
+  <data name="تنزيلمرفقToolStripMenuItem.Text" xml:space="preserve">
+    <value>تنزيل مرفق</value>
+  </data>
+  <data name="حدفToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 24</value>
+  </data>
+  <data name="حدفToolStripMenuItem.Text" xml:space="preserve">
+    <value>حدف</value>
+  </data>
+  <metadata name="deleteCopyMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>737, 17</value>
+  </metadata>
+  <data name="deleteCopyMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 28</value>
+  </data>
+  <data name="&gt;&gt;deleteCopyMenu.Name" xml:space="preserve">
+    <value>deleteCopyMenu</value>
+  </data>
+  <data name="&gt;&gt;deleteCopyMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 20</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>811, 725</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>عرض تفاصيل المراسلة</value>
+  </data>
+  <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
+    <value>columnHeader2</value>
+  </data>
+  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
+    <value>columnHeader3</value>
+  </data>
+  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Id.Name" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="&gt;&gt;Id.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RecipName.Name" xml:space="preserve">
+    <value>RecipName</value>
+  </data>
+  <data name="&gt;&gt;RecipName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;حــدفToolStripMenuItem.Name" xml:space="preserve">
+    <value>حــدفToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;حــدفToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;clmId.Name" xml:space="preserve">
+    <value>clmId</value>
+  </data>
+  <data name="&gt;&gt;clmId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;clmFileName.Name" xml:space="preserve">
+    <value>clmFileName</value>
+  </data>
+  <data name="&gt;&gt;clmFileName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;clmFileExtention.Name" xml:space="preserve">
+    <value>clmFileExtention</value>
+  </data>
+  <data name="&gt;&gt;clmFileExtention.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;clmFileSize.Name" xml:space="preserve">
+    <value>clmFileSize</value>
+  </data>
+  <data name="&gt;&gt;clmFileSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;تنزيلمرفقToolStripMenuItem.Name" xml:space="preserve">
+    <value>تنزيلمرفقToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;تنزيلمرفقToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;حدفToolStripMenuItem.Name" xml:space="preserve">
+    <value>حدفToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;حدفToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>MessageDetailsForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

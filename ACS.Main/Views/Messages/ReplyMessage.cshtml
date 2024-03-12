@@ -1,0 +1,178 @@
+﻿@model ACS.Core.Entities.Message
+@using Syncfusion.EJ2
+
+@{
+    ViewData["Title"] = "الرد على مراسلة";
+}
+
+@{
+    var asyncSettings = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = @Url.Content("~/Messages/SaveFile"), RemoveUrl = @Url.Content("~/Messages/RemoveFile") };
+    var asyncSettingsForTempFiles = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = @Url.Content("~/Messages/SaveTempFile") };
+}
+
+@section NewMessgaeStyle {
+    <link href="@Url.Content("~/css/NewMessgaeStyle.css")" rel="stylesheet" type="text/css" />
+}
+
+    <div class="container pt-3">
+        <div class="row e-rtl bg-secondary mb-2 rounded">
+        @if (ViewBag.SenderResponsibilityCode != null)
+        {
+            <input id="senderResponsibilityCode" type="hidden" value="@ViewBag.SenderResponsibilityCode" />
+        }
+        <input id="senderDiscription" type="hidden" value="@ViewBag.SenderDescription" />
+        <div class="row col-md-6">
+            <div>
+                <b class="text-white bg-dark rounded p-2 mt-2" style="font-size:larger;"> نوع المراسلة </b>
+            </div>
+            @Html.Raw("&nbsp;")
+            <div class="font-weight-bolder text-light" style="font-size:larger;">
+                رد
+            </div>
+        </div>
+        <div class="row col-md-6">
+            <div>
+                <b class="text-white bg-dark rounded p-2 mt-2" style="font-size:larger;"> صفة المرسل </b>
+            </div>
+            @Html.Raw("&nbsp;")
+            <div class="font-weight-bolder p-0 text-light" style="font-size:larger;">
+                @Html.Raw((String)ViewBag.SenderDescription)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @if (ViewBag.sn != null)
+        {
+            <div class="col-3">
+                @*<input readonly value="@ViewBag.sn" style="text-align:center;" id="serial" type="text" class="form-control form-control-lg" placeholder="الرقم الإشاري">*@
+                <div class="input-group">
+                    <input readonly id="serial" type="text" size="8" maxlength="8" class="form-control text-center form-control-lg" value="@ViewBag.sn">
+                    <input type="text" size="4" maxlength="4" id="lserial" class=" form-control text-center form-control-lg" placeholder="التسلسل الإشاري">
+                </div>
+            </div>
+            <div class="col-9 text-right">
+                <select data-placeholder="إضافة مستلمين" multiple id="UsersList" class="chosen-select-rtl mb-3 form-control form-control-lg" asp-items="ViewBag.Users">
+                    <option value="@ViewBag.SenderId" disabled selected>@ViewBag.SenderName</option>
+                </select>
+            </div>
+        }
+        else
+        {
+            <div class="col-12 text-right">
+                <select data-placeholder="إضافة مستلمين" multiple id="UsersList" class="chosen-select-rtl mb-3 form-control form-control-lg" asp-items="ViewBag.Users">
+                    <option value="@ViewBag.SenderId" disabled selected>@ViewBag.SenderName</option>
+                </select>
+            </div>
+        }
+    </div>
+    <div class="row mt-3">
+        <div class="col-md e-rtl">
+            <input id="OriginalMessageId" type="hidden" value="@ViewBag.OriginalMessageId" />
+            <input style="text-align:right;" id="title" value="@ViewBag.MessageTitle" type="text" class="form-control form-control-lg" autocomplete="off">
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <ul class="nav nav-tabs e-rtl" role="tablist">
+                <li class="nav-item">
+                    <a style="color: black;font-size:18px; font-weight:900;" class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" onclick="selectTextOrCopy('True')" id="textMessage">مراسلة نصية</a>
+                </li>
+                <li class="nav-item">
+                    <a style="color: black;font-size:18px; font-weight:900;" class="nav-link" data-toggle="tab" href="#tabs-2" role="tab" onclick="selectTextOrCopy('False')" id="copyMessage">نسخة ورقية (PDF , JPG)</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                    <ejs-richtexteditor enableRtl="true" width="100%" id="body" showCharCount="true">
+                        <e-richtexteditor-pastecleanupsettings plainText="true"></e-richtexteditor-pastecleanupsettings>
+                        <e-richtexteditor-toolbarsettings type="MultiRow" items="@ViewBag.items">
+
+                        </e-richtexteditor-toolbarsettings>
+                    </ejs-richtexteditor>
+                </div>
+
+                <div class="tab-pane" id="tabs-2" role="tabpanel">
+                    <ejs-uploader selected="onFileSelected" allowedExtensions=".pdf,.jpg,.jpeg" enableRtl="true" id="UploadFiles" autoUpload="false" dropArea=".control-fluid" asyncSettings="@asyncSettings">
+                    </ejs-uploader>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-2 tool">
+            @if (ViewBag.sn != null)
+            {
+                <a class="btn btn-dark btn-lg w-100" onclick="send()" id="send" href="#"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+            }
+            else
+            {
+                <a class="btn btn-dark btn-lg w-100" onclick="send('True')" id="send" href="#"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+            }
+            <span class="tooltipp">إرسال</span>
+        </div>
+        <div class="col-1 tool">
+            @*<a class="btn btn-dark btn-lg w-100" onclick="save()" id="send" href="#"><i class="fa fa-archive" aria-hidden="true"></i></a>
+            <span class="tooltipp">حفظ إلى المسودات</span>*@
+        </div>
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            @* --------------------------------- *@
+            <div class="control-section">
+                <div class="control_wrapper">
+                    <ejs-uploader selected="onTempFileSelected" enableRtl="true" id="UploadTempFiles" autoUpload="false" dropArea=".control-fluid" asyncSettings="@asyncSettingsForTempFiles">
+                    </ejs-uploader>
+                </div>
+            </div>
+            @* --------------------------------- *@
+        </div>
+    </div>
+</div>
+@*<script>
+    window.onbeforeunload = function () {
+    return 'You have unsaved changes!';
+    };
+    </script>*@
+
+<script>
+    function onFileRemove(args) {
+        args.postRawFile = true;
+    };
+    //var dropElement = document.getElementsByClassName('control-fluid')[0];
+    //function onChange(args) {
+    //    var uploadObj = document.getElementById("UploadFiles")
+    //    uploadObj.ej2_instances[0].autoUpload = args.checked;
+    //    uploadObj.ej2_instances[0].clearAll();
+    //};
+    //function onChanged(args) {
+    //    var uploadObj = document.getElementById("UploadFiles")
+    //    uploadObj.ej2_instances[0].sequentialUpload = args.checked;
+    //    uploadObj.ej2_instances[0].clearAll();
+    //};
+</script>
+
+<script>
+    window.onload = function (args) {
+        var uploaderObj = document.getElementById("UploadFiles").ej2_instances[0];
+        uploaderObj.setProperties({
+            buttons: {
+                browse: 'إدراج النسخة الورقية',
+                clear: 'حذف الكل',
+                upload: ''
+            }
+        })
+        var uploaderObj = document.getElementById("UploadTempFiles").ej2_instances[0];
+        uploaderObj.setProperties({
+            buttons: {
+                browse: 'إرفاق ملف إضافي',
+                clear: 'حذف الكل',
+                upload: ''
+            }
+        })
+        var rteObj = document.getElementById('body').ej2_instances[0];
+        rteObj.executeCommand('justifyRight');
+        rteObj.executeCommand('fontSize', '18pt');
+    };
+</script>

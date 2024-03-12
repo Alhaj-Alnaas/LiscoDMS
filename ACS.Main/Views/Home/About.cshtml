@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "حول النظام";
+}
+
+<div class="container mt-5">
+    <ul class="nav nav-tabs e-rtl" role="tablist">
+        @*<li class="nav-item">
+        <a style="color: black;font-size:18px; font-weight:900;" class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">طريقة عمل النظام (فيديو)</a>
+        </li>
+        <li class="nav-item">
+        <a style="color: black;font-size:18px; font-weight:900;" class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">طريقة عمل النظام (دليل المستخدم)</a>
+        </li>*@
+        <li class="nav-item">
+            <a style="color: black;font-size:18px; font-weight:900;" class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">حول النظام</a>
+        </li>
+    </ul><!-- Tab panes -->
+    <div class="tab-content">
+        @*<div class="tab-pane active" id="tabs-1" role="tabpanel">
+        <div class="row mt-1">
+        <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="\Video.mp4" allowfullscreen></iframe>
+        </div>
+        </div>
+        </div>
+        <div class="tab-pane" id="tabs-2" role="tabpanel">
+        <div class="embed-responsive embed-responsive-16by9 rounded">
+        <object data="\UserManual.pdf" type="application/pdf">
+        </object>
+        </div>
+        </div>*@
+        <div class="tab-pane active" id="tabs-3" role="tabpanel">
+            <div class="row text-right mt-3 bg-dark text-light p-1 e-rtl">
+                <p>
+                    يهدف هذا النظام إلى تغطية كافة المراسلات الإدارية داخل الشركة، وهو يشبه البريد الإلكتروني ولكنه ليس كذلك، حيث يتميز عن البريد الإلكتروني بمميزات منها:
+                </p>
+                <ul class="mr-5" dir="rtl">
+                    <li>إمكانية إرسال المراسلة بعدة صفات رسمية مثل مدير إدارة، رئيس فريق ...</li>
+                    <li>العمل على مستوى عالي من الأمان والتشفير والمراقبة</li>
+                    <li>مراعاة التسلسل الإداري المعمول به في الشركة</li>
+                    <li>يمكن استعماله كبريد خاص</li>
+                    <li>صرف الرقم الإشاري بشكل آلي</li>
+                    <li>البحث واستعراض المراسلات من النظام القديم</li>
+                    <li>امكانية إضافة مستخدم فرعي للحساب ليقوم بتجهيز المسودات</li>
+                    <li>عكس أي تغييرات تحدث في نظام شؤون الأفراد على النظام، مثل تغيير المدراء أو تشكيل اللجان</li>
+                    <li>إمكانية استخدام النظام من متصفح الهاتف</li>
+                    <li>تسجيل مستخدم جديد أو استرجاع رمز الدخول المفقود بدون الحاجة إلى الرجوع للقسم أو الإدارة وذلك عن طريق SMS</li>
+                    <li>تطبيق خاص بقسم المحفوظات يمكنه العمل مع الماسحة الضوئية لتسهيل عمل موظفي المحفوظات</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button onclick="prevent()" id="sendd" class="button" id="submit"> Submit report</button>
+<script>
+    function prevent() {
+        sendb = document.getElementById('sendd');
+        //event.preventDefault();
+        //alert("One clock pleeeeease");
+        sendb.setAttribute('disabled', true);
+        //send('True');
+    };
+                            //document.querySelector("#test").click(function () {
+                            //    document.querySelector(this).attr("disabled", true);
+                            //    setTimeout(function () {
+                            //        document.querySelector('#btnTest').removeAttr("disabled");
+                            //        alert("One clock pleeeeease");
+                            //    }, 30000);
+                            //});
+
+</script>

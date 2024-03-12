@@ -1,0 +1,206 @@
+﻿@model ACS.Core.Entities.Message
+@using Syncfusion.EJ2
+
+@{
+    ViewData["Title"] = "مراسلة جديدة";
+}
+
+@{
+    var asyncSettings = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = @Url.Content("~/Messages/SaveFile") };
+    var asyncSettingsForTempFiles = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = @Url.Content("~/Messages/SaveTempFile") };
+}
+
+@section NewMessgaeStyle {
+    <link href="@Url.Content("~/css/NewMessgaeStyle.css")" rel="stylesheet" type="text/css" />
+}
+
+
+    <div class="container pt-3">
+        <div class="row e-rtl bg-secondary mb-2 rounded">
+            <input id="senderDiscription" type="hidden" value="@ViewBag.SenderDescription" />
+            <div class="row col-md-6">
+                <div>
+                    <b class="text-white bg-dark rounded p-2 mt-2" style="font-size:larger;"> نوع المراسلة </b>
+                </div>
+                @Html.Raw("&nbsp;")
+                <div class="font-weight-bolder text-light" style="font-size:larger;">
+                    بريد داخلي
+                </div>
+            </div>
+            <div class="row col-md-6">
+                <div>
+                    <b class="text-white bg-dark rounded p-2 mt-2" style="font-size:larger;"> صفة المرسل </b>
+                </div>
+                @Html.Raw("&nbsp;")
+                <div class="font-weight-bolder p-0 text-light" style="font-size:larger;">
+                    @Html.Raw((String)ViewBag.SenderDescription)
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12 text-right">
+                <select data-placeholder="إرسال إلى" multiple id="UsersList" class="chosen-select-rtl mb-3 form-control form-control-lg" asp-items="ViewBag.Users"></select>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-12 text-right">
+                <select data-placeholder="صورة إلى" multiple id="CCUsersList" class="chosen-select-rtl mb-3 form-control form-control-lg" asp-items="ViewBag.Users"></select>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md e-rtl">
+                <input style="text-align:right;" id="title" type="text" class="form-control form-control-lg" placeholder="عنوان المراسلة" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-12">
+                <ul class="nav nav-tabs e-rtl" role="tablist">
+                    <li class="nav-item">
+                        <a style="color: black;font-size:18px; font-weight:900;" class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" onclick="selectTextOrCopy('True')" id="textMessage">مراسلة نصية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: black;font-size:18px; font-weight:900;" class="nav-link" data-toggle="tab" href="#tabs-2" role="tab" onclick="selectTextOrCopy('False')" id="copyMessage">نسخة ورقية (PDF , JPG)</a>
+                    </li>
+                    <li class="row mt-2">
+                        <div>
+                            <b style="color: red;font-size:14px; font-weight:900;"> تنبيه... عند اختيار مراسلة نصية ، وللحصول على أفضل النتائج يستحسن الكتابة في المكان المخصص مباشرةً وعدم استخدام خاصية  النسخ واللصق</b>
+                        </div>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                        <ejs-richtexteditor enableRtl="true" width="100%" id="body" showCharCount="true">
+                            <e-richtexteditor-pastecleanupsettings plainText="true"></e-richtexteditor-pastecleanupsettings>
+                            <e-richtexteditor-toolbarsettings type="MultiRow" items="@ViewBag.items">
+
+                            </e-richtexteditor-toolbarsettings>
+                        </ejs-richtexteditor>
+                    </div>
+
+                    <div class="tab-pane" id="tabs-2" role="tabpanel">
+                        <ejs-uploader selected="onFileSelected" allowedExtensions=".pdf,.jpg,.jpeg" enableRtl="true" id="UploadFiles" autoUpload="false" dropArea=".control-fluid" asyncSettings="@asyncSettings">
+                        </ejs-uploader>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+
+            <div class="col-md-2 tool">
+                <a class="btn btn-dark btn-lg w-100" onclick="checkThenSend()" id="send" href="#"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+                <span class="tooltipp">إرسال</span>
+            </div>
+            <div class="col-md-1 tool">
+                <a class="btn btn-dark btn-lg w-100" onclick="save('True')" id="send" href="#"><i class="fa fa-archive" aria-hidden="true"></i></a>
+                <span class="tooltipp">حفظ إلى المسودات</span>
+            </div>
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                @* --------------------------------- *@
+
+                <div class="control-section">
+                    <div class="control_wrapper">
+                        <ejs-uploader selected="onTempFileSelected" enableRtl="true" id="UploadTempFiles" autoUpload="false" dropArea=".control-fluid" asyncSettings="@asyncSettingsForTempFiles">
+                        </ejs-uploader>
+                    </div>
+                </div>
+                @* --------------------------------- *@
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="sendingModal" tabindex="-1" role="alert" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="alert">
+            <div class="modal-content ">
+                <div class="modal-body" style="position: relative;min-height: 200px; background-color:darkgrey">
+                    <div class="containerr">
+                        <div class="box">
+                            <div class="border one"></div>
+                            <div class="border two"></div>
+                            <div class="border three"></div>
+                            <div class="border four"></div>
+
+                            <div class="line one"></div>
+                            <div class="line two"></div>
+                            <div class="line three"></div>
+                        </div>
+                    </div><div class="containerr">
+                        <div class="box">
+                            <div class="border one"></div>
+                            <div class="border two"></div>
+                            <div class="border three"></div>
+                            <div class="border four"></div>
+
+                            <div class="line one"></div>
+                            <div class="line two"></div>
+                            <div class="line three"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<script>
+    window.onbeforeunload = function () {
+    return 'Changes you made may not be saved!';
+    };
+    </script>*@
+    
+    <script>
+        function onFileRemove(args) {
+            args.postRawFile = true;
+        };
+        //var dropElement = document.getElementsByClassName('control-fluid')[0];
+        //function onChange(args) {
+        //    var uploadObj = document.getElementById("UploadFiles")
+        //    uploadObj.ej2_instances[0].autoUpload = args.checked;
+        //    uploadObj.ej2_instances[0].clearAll();
+        //};
+        //function onChanged(args) {
+        //    var uploadObj = document.getElementById("UploadFiles")
+        //    uploadObj.ej2_instances[0].sequentialUpload = args.checked;
+        //    uploadObj.ej2_instances[0].clearAll();
+        //};
+    </script>
+
+    <script>
+        window.onload = function (args) {
+            var uploaderObj = document.getElementById("UploadFiles").ej2_instances[0];
+            uploaderObj.setProperties({
+                buttons: {
+                    browse: 'إدراج النسخة الورقية',
+                    clear: 'حذف الكل',
+                    upload: ''
+                }
+            })
+            var uploaderObj = document.getElementById("UploadTempFiles").ej2_instances[0];
+            uploaderObj.setProperties({
+                buttons: {
+                    browse: 'إرفاق ملف إضافي',
+                    clear: 'حذف الكل',
+                    upload: ''
+                }
+            })
+            var rteObj = document.getElementById('body').ej2_instances[0];
+            rteObj.executeCommand('justifyRight');
+            rteObj.executeCommand('fontSize', '18pt');
+        };
+
+        function checkThenSend() {
+            if (validateNewMessageForm() == false)
+                return false;
+            else {
+                $("#sendingModal").appendTo("body");
+                $("#sendingModal").modal({ backdrop: 'static', keyboard: false }, 'show');
+                send('True');
+            }
+        };
+    </script>
+
+
+

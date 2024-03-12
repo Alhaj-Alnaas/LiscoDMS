@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "الصادر";
+}
+
+@{
+    List<object> operators = new List<object>();
+    operators.Add(new { value = "startswith", text = "يبدأ بـ" });
+    operators.Add(new { value = "endswith", text = "ينهي بـ" });
+    operators.Add(new { value = "contains", text = "يحتوي على" });
+    operators.Add(new { value = "equal", text = "يساوي" });
+    operators.Add(new { value = "notequal", text = "لا يساوي" });
+}
+
+<style>
+    .e-grid .e-headercell {
+        background-color: #2382c3;
+        color: white;
+    }
+
+    .e-grid .e-headercelldiv {
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .e-grid .e-rowcell {
+        font-size: 15px;
+    }
+</style>
+
+<div class="container-fluid pt-1">
+    <div class="control-section">
+        <ejs-grid id="Grid" dataSource="ViewBag.dataSource" allowGrouping="true" allowFiltering="true" enableRtl="true" allowReordering="true" allowPaging="true" allowResizing="true" enableHover="true"  rowSelected="rowSelected" gridLines="Both">
+
+            <e-grid-selectionsettings type="Multiple"></e-grid-selectionsettings>
+            <e-grid-editSettings allowAdding="false" allowDeleting="false" allowEditing="false"></e-grid-editSettings>
+            <e-grid-filterSettings type="Menu" operators="@(new { stringOperator = operators })"></e-grid-filterSettings>
+            <e-grid-pagesettings pageSize="15" pageCount="10">
+            </e-grid-pagesettings>
+            <e-grid-groupSettings enableLazyLoading="true"></e-grid-groupSettings>
+
+            <e-grid-columns>
+                <e-grid-column field="Id" headerText="Id" isPrimaryKey="true" width="0"></e-grid-column>
+                <e-grid-column field="SerialNumber" headerText="الرقم الإشاري" isPrimaryKey="true" textAlign="Right" width="110" Allowgrouping="false"></e-grid-column>
+                <e-grid-column field="Title" headerText="موضوع المراسلة" width="200" textAlign="Left" Allowgrouping="false"></e-grid-column>
+                <e-grid-column field="SendingDateTime" format="y-M-d" headerText="تاريخ الإرسال" type="date" width="90" textAlign="Right"></e-grid-column>
+                <e-grid-column field="SenderDiscription" headerText="المرسل" textAlign="Right" format="C2" width="120" Allowgrouping="false"></e-grid-column>
+                <e-grid-column field="RecipintDiscription" headerText="إرسال إلى" width="150" textAlign="Left"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+</div>
+

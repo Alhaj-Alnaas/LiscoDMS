@@ -1,0 +1,81 @@
+﻿
+@inject ACS.Core.Interfaces.Services.IMessagesServices<Message> _service
+@inject ACS.Core.Interfaces.Providers.IUserProvider _UserProvider
+
+@{
+    var CurrentUser = await _UserProvider.GetCurrentUserAsync();
+    var DraftsCount = await _service.GetDraftMessageCount(CurrentUser);
+}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - نظام إدارة المراسلات</title>
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/font-awesome/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="icon" href="~/file-signature-solid.ico">
+    <link href="~/css/MessagesStyle.css" rel="stylesheet" />
+    <link href="~/css/SearchBoxstyle.css" rel="stylesheet" />
+    @* --------------------------------------------------------------------------------------------------------- *@
+    <link href="~/chosen/chosen.css" rel="stylesheet" />
+    @* --------------------------------------------------------------------------------------------------------- *@
+    <link href="~/css/ej2/material.css" rel="stylesheet" />
+    @* --------------------------------------------------------------------------------------------------------- *@
+    @RenderSection("TimelineStyle", false)
+    @RenderSection("NewMessgaeStyle", false)
+    @RenderSection("Scripts", required: false)
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <div class="logo_name">نظام إدارة المراسلات</div>
+            <i class="fas fa-file-signature icon"></i>
+            <i class="fas fa-bars" id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            
+            <li class="nav-item @Html.ActiveClass("Messages", "Drafts")">
+                <a asp-controller="Messages" asp-action="Drafts">
+                    <i class="fa fa-archive" aria-hidden="true"></i>
+                    <span class="links_name">المسودات</span>
+                    @{
+                        if (DraftsCount > 0)
+                        {<span class="badge badge-pill badge-primary" style="position:absolute; left:0; top:2px">@DraftsCount</span>}
+                    }
+                </a>
+                <span class="tooltip">المسودات</span>
+            </li>
+            <li class="nav-item @Html.ActiveClass("OldSystemMessage", "Search")">
+                <a asp-controller="OldSystemMessage" asp-action="Search">
+                    <i class="fas fa-folder-minus"></i>
+                    <span class="links_name">النظام القديم</span>
+                </a>
+                <span class="tooltip">النظام القديم</span>
+            </li>
+            <li class="profile">
+                <partial name="_LoginPartial" />
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </section>
+    <script src="~/js/site.js"></script>
+    <script src="~/js/script.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @* --------------------------------------------------------------------------------------------------------- *@
+    <script src="~/chosen/chosen.jquery.min.js"></script>
+    <script src="~/chosen/init.js"></script>
+    @* --------------------------------------------------------------------------------------------------------- *@
+    <script src="~/js/ej2/ej2.min.js"></script>
+    <ejs-scripts></ejs-scripts>
+    @* --------------------------------------------------------------------------------------------------------- *@
+</body>
+</html>

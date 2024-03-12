@@ -1,0 +1,87 @@
+﻿@model IList<SearchInOldSystem.DatabaseEntity.Employees>
+
+@section TimelineStyle {
+    <link href="@Url.Content("~/css/timeline.css")" rel="stylesheet" type="text/css" />
+}
+
+@*@{ var item = Model.FirstOrDefault(m => m.OriginMessageId == null);}*@
+
+<div class="container-fluid">
+    <div class="row e-rtl mt-2">
+        <div class="col-md-7">
+            @*<div class="embed-responsive embed-responsive-4by3">
+                <iframe id="iframe" src="~/TempDoc/[OldSystemDoc].pdf" allowfullscreen></iframe>
+            </div>*@
+            <div class="embed-responsive embed-responsive-4by3">
+                <object data="@ViewBag.Path" type="application/pdf">
+                </object>
+            </div>
+        </div>
+
+       <div class="col-md-5">
+                    <div class="row">
+                        <table class="table table-bordered table-striped table-hover" dir="rtl" lang="ar">
+                            <thead>
+                                <tr>
+
+                                    <th style="text-align: center;">رقم الرسالة</th>
+                                    <th style="text-align: center;">رقم تسلسل</th>
+                                    <th style="text-align: center;">صادرة من</th>
+                                    <th style="text-align: center;">تاريخ الرسالة</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+
+                                        <td style="text-align: center;">
+                                            @Html.DisplayFor(modelItem => item.LtrNo)
+                                        </td>
+
+                                        <td style="text-align:right;">
+                                            @Html.DisplayFor(modelItem => item.SltrNo)
+                                        </td>
+
+                                        <td style="text-align: right;">
+                                            @Html.DisplayFor(modelItem => item.WplacExpno)
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                            @*@Html.DisplayFor(modelItem => item.EnterDate)*@
+                                            @Convert.ToString(string.Format("{0:yyyy/MM/dd}", item.EnterDate))
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table> 
+                    </div>
+                </div>
+    </div>
+   
+</div>
+
+<script>
+    function ShowModal_f() {
+        $("#ForwardModal").appendTo("body");
+        $('#ForwardModal').on('shown.bs.modal', function () {
+            $('.chosen-select-rtl', this).chosen('destroy').chosen({ rtl: true });
+        });
+    };
+    function ShowModal_r() {
+        $("#ReplyModal").appendTo("body");
+        $('#ReplyModal').on('shown.bs.modal', function () {
+            $('.chosen-select-rtl', this).chosen('destroy').chosen({ rtl: true });
+        });
+    };
+
+    function ShowModal_h(id) {
+        var url = "/Messages/MessageHistory?Id=" + id;
+        $("#BodyDiv").load(url, function () {
+            $("#HistoryModal").appendTo("body");
+            $("#HistoryModal").modal("show");
+        })
+    };
+</script>

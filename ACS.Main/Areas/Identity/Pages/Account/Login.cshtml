@@ -1,0 +1,89 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "تسجيل الدخول";
+}
+
+<style>
+    .bg-login-image {
+        background: url('/Images/lisco1.jpg');
+        background-position: center;
+        background-size: cover;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        <div class="col-lg-6 text-right">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">نظام إدارة المراسلات</h1>
+                                </div>
+                                <form class="user" id="account" method="post">
+                                    <hr />
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.FileNumber"></label>
+                                        <input asp-for="Input.FileNumber" id="txtUserId" class="form-control" />
+                                        <span asp-validation-for="Input.FileNumber" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.Password"></label>
+                                        <input asp-for="Input.Password" id="txtPassword" class="form-control" />
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label asp-for="Input.RememberMe">
+                                                <input asp-for="Input.RememberMe" />
+                                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">تسجيل دخول</button>
+                                    </div>
+                                    <hr>
+                                    <hr>
+                                    <div class="form-group text-center">
+                                        <p>
+                                                <a id="forgot-password" asp-page="./ForgotPassword">نسيت كلمة المرور؟</a>
+                                            </p>
+                                        <p>
+                                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">مستخدم جديد؟</a>
+                                            </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var input = document.getElementById("txtUserId");
+    window.onload = function (args) {
+        input.focus();
+        input.setSelectionRange(0, input.value.length)
+    };
+    input.addEventListener("keydown", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("txtPassword").focus();
+
+        }
+
+    });
+</script>
+
+@*@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }*@

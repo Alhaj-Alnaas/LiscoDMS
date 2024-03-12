@@ -1,0 +1,76 @@
+﻿@model IList<SearchInOldSystem.DatabaseEntity.PostSendr>
+
+<div style="margin-top:80px;">
+    <div height:100px;>
+        <table id="table-1" class="table table-bordered table-striped table-hover mt-md-5" dir="rtl" lang="ar">
+            <thead>
+                <tr>
+                    @* <th style="text-align: center;">Id</th>*@
+                    @*<th style="text-align: center;">السنة</th>*@
+                    <th style="text-align: center;">رقم الرسالة</th>
+                    <th style="text-align: center;">موضوع الرسالة</th>
+                    @*<th style="text-align: center;">صادرة من</th>*@
+                    <th style="text-align: center;">تاريخ الرسالة</th>
+                    <th style="text-align: center;">تصنيف الرسالة</th>
+                    <th style="text-align: center;">جهة الرسالة</th>
+
+                    <th style="text-align: center;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @*<td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.LtrYear)
+                            </td>*@
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.LaterNo)
+                        </td>
+
+                        <td style="text-align:right;">
+                            @Html.DisplayFor(modelItem => item.LaterInfor)
+                        </td>
+
+                        @*<td style="text-align: right;">
+                            @Html.DisplayFor(modelItem => item.WplacRecl)
+                            </td>*@
+
+                        <td style="text-align: center;">
+                            @*@Html.DisplayFor(modelItem => item.EnterDate)*@
+                            @Convert.ToString(string.Format("{0:yyyy/MM/dd}", item.EnterDate))
+                        </td>
+
+                        @{
+                            if (item.WplacExpno == ViewBag.ResponsibilityCode)
+                            {
+                                <td style="text-align: center;">
+                                    وارد
+                                </td>
+                                <td style="text-align: center;">
+                                    @Html.DisplayFor(modelItem => item.WplacRecl)
+                                </td>
+                            }
+                            else if (item.WplacRecno == ViewBag.ResponsibilityCode)
+                            {
+                                <td style="text-align: center;">
+                                    صادر
+                                </td>
+                                <td style="text-align: center;">
+                                    @Html.DisplayFor(modelItem => item.WplacExpl)
+                                </td>
+                            }
+                        }
+
+                        <td>
+                            <a class="btn btn-sm btn-info" asp-action="ShowMessageDetails" asp-route-id="@item.LaterNo" asp-route-LtrYear="@item.LtrYear" target="_blank">عرض التفاصيل</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div style="height:100px;">
+    </div>
+</div>
